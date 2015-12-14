@@ -16,15 +16,6 @@ import com.google.example.games.basegameutils.BaseGameActivity;
 
 public class MainActivity extends BaseGameActivity implements View.OnClickListener {
 
-    private static String LEADERBOARD_ID_CLASSIC;
-    private static final int REQUEST_LEADERBOARD = 1;
-    private static final int REQUEST_ACHIEVEMENTS = 1;
-
-    // Variables for sound and color
-    public static final String TILE_COLOR = "tileColor";
-    public static final String SELECTED_COLOR = "selectedColor";
-    static Context context;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT < 16) {
@@ -43,8 +34,6 @@ public class MainActivity extends BaseGameActivity implements View.OnClickListen
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         mAdView.loadAd(adRequest);
 
-        LEADERBOARD_ID_CLASSIC = getResources().getString(R.string.leaderboard_classic_mode);
-
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
         findViewById(R.id.playClassicButton).setOnClickListener(this);
@@ -55,9 +44,6 @@ public class MainActivity extends BaseGameActivity implements View.OnClickListen
         findViewById(R.id.achievementsButton).setOnClickListener(this);
 
         findViewById(R.id.sign_out_button).setVisibility(View.GONE);
-
-        context = this;
-        setColorIfNotExist();
     }
 
     @Override
@@ -89,13 +75,13 @@ public class MainActivity extends BaseGameActivity implements View.OnClickListen
             case R.id.leaderboardButton: {
                 if (getApiClient().isConnected())
                     startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(),
-                            LEADERBOARD_ID_CLASSIC), REQUEST_LEADERBOARD);
+                            App.LEADERBOARD_ID_CLASSIC), App.REQUEST_LEADERBOARD);
                 else if (!getApiClient().isConnecting())
                     getApiClient().connect();
             } break;
             case R.id.achievementsButton: {
                 if (getApiClient().isConnected())
-                    startActivityForResult(Games.Achievements.getAchievementsIntent(getApiClient()), REQUEST_ACHIEVEMENTS);
+                    startActivityForResult(Games.Achievements.getAchievementsIntent(getApiClient()), App.REQUEST_ACHIEVEMENTS);
                 else if (!getApiClient().isConnecting())
                     getApiClient().connect();
             } break;
@@ -113,13 +99,5 @@ public class MainActivity extends BaseGameActivity implements View.OnClickListen
     public void onSignInFailed() {
         findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
         findViewById(R.id.sign_out_button).setVisibility(View.GONE);
-    }
-
-    public void setColorIfNotExist(){
-        if (!App.parameters.contains(TILE_COLOR)){
-            App.editorParameters.putString(TILE_COLOR, "#1248e6");
-            App.editorParameters.putInt(SELECTED_COLOR, 0);
-            App.editorParameters.apply();
-        }
     }
 }

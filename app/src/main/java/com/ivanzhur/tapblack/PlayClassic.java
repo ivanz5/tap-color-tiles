@@ -68,10 +68,6 @@ public class PlayClassic extends BaseGameActivity {
     public static final String RATE_ASKED = "rateAsked";
     public static final String TILE_COLOR = "tileColor";
     final Context context = this;
-
-    // Variables for Plus Leaderboard
-    private static String LEADERBOARD_ID_CLASSIC;
-    private static final int REQUEST_LEADERBOARD = 1;
     //endregion
 
     //region Handler for adding tiles
@@ -145,7 +141,7 @@ public class PlayClassic extends BaseGameActivity {
         restartButton = (Button)findViewById(R.id.restartButtonClassic);
         shareButton = (Button)findViewById(R.id.shareButtonClassic);
         leaderboardButton = (Button)findViewById(R.id.leaderboardButtonClassic);
-        LEADERBOARD_ID_CLASSIC = getResources().getString(R.string.leaderboard_classic_mode);
+        App.LEADERBOARD_ID_CLASSIC = getResources().getString(R.string.leaderboard_classic_mode);
     }
 
     public void setAnimation()
@@ -324,7 +320,7 @@ public class PlayClassic extends BaseGameActivity {
     {
         if (getApiClient().isConnected())
         startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(),
-                LEADERBOARD_ID_CLASSIC), REQUEST_LEADERBOARD);
+                App.LEADERBOARD_ID_CLASSIC), App.REQUEST_LEADERBOARD);
         else if (!getApiClient().isConnecting())
             getApiClient().connect();
     }
@@ -376,7 +372,7 @@ public class PlayClassic extends BaseGameActivity {
 
         // Update leaderboard and achievements
         if (getApiClient().isConnected()) {
-            Games.Leaderboards.submitScore(getApiClient(), LEADERBOARD_ID_CLASSIC, tiles);
+            Games.Leaderboards.submitScore(getApiClient(), App.LEADERBOARD_ID_CLASSIC, tiles);
             if (tiles >= 100) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_beginner));
             if (tiles >= 300) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_expert));
             if (tiles >= 500) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_master_tapper));

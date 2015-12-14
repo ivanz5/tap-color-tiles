@@ -14,10 +14,17 @@ public class App extends Application {
     public static final String PARAMETERS = "com.ivanzhur.tapblack.parameters";
     public static final String HIGH_SCORES = "com.ivanzhur.tapblack.highScores";
 
+    // Variables for sound and color
+    public static final String TILE_COLOR = "tileColor";
+    public static final String SELECTED_COLOR = "selectedColor";
     public static final String SOUND_BLUE_TILES = "soundBlueTiles";
     public static final String SOUND_WHITE_TILES = "soundWhiteTiles";
     public static final String SOUND_BLUE_SELECTED = "soundBlueSelected";
     public static final String SOUND_WHITE_SELECTED = "soundWhiteSelected";
+
+    static String LEADERBOARD_ID_CLASSIC;
+    static final int REQUEST_LEADERBOARD = 1;
+    static final int REQUEST_ACHIEVEMENTS = 1;
 
     static SharedPreferences sound, parameters, highScores;
     static SharedPreferences.Editor editorSound, editorParameters, editorHighScores;
@@ -30,10 +37,13 @@ public class App extends Application {
     @Override
     public void onCreate(){
         super.onCreate();
+
         context = this;
+        LEADERBOARD_ID_CLASSIC = getResources().getString(R.string.leaderboard_classic_mode);
 
         setSharedPreferences();
         setSound();
+        setColor();
     }
 
     private void setSharedPreferences(){
@@ -103,5 +113,13 @@ public class App extends Application {
         float maxVolume = (float) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         float volume = actVolume / maxVolume;
         if (soundId != -1) soundPool.play(soundId, volume, volume, 1, 0, 1f);
+    }
+
+    public void setColor(){
+        if (!App.parameters.contains(TILE_COLOR)){
+            App.editorParameters.putString(TILE_COLOR, "#1248e6");
+            App.editorParameters.putInt(SELECTED_COLOR, 0);
+            App.editorParameters.apply();
+        }
     }
 }
