@@ -47,6 +47,12 @@ public class MainActivity extends BaseGameActivity implements View.OnClickListen
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
+        findViewById(R.id.playClassicButton).setOnClickListener(this);
+        findViewById(R.id.playTimeButton).setOnClickListener(this);
+        findViewById(R.id.settingsButton).setOnClickListener(this);
+        findViewById(R.id.leaderboardButton).setOnClickListener(this);
+        findViewById(R.id.rulesButton).setOnClickListener(this);
+        findViewById(R.id.achievementsButton).setOnClickListener(this);
 
         findViewById(R.id.sign_out_button).setVisibility(View.GONE);
 
@@ -56,14 +62,46 @@ public class MainActivity extends BaseGameActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.sign_in_button) {
-            beginUserInitiatedSignIn();
+        Intent intent = null;
+        switch (view.getId()){
+            case R.id.sign_in_button: {
+                beginUserInitiatedSignIn();
+            } break;
+            case R.id.sign_out_button: {
+                signOut();
+                findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+                findViewById(R.id.sign_out_button).setVisibility(View.GONE);
+            } break;
+
+            case R.id.playClassicButton:
+                intent = new Intent(this, PlayClassic.class);
+                break;
+            case R.id.playTimeButton:
+                intent = new Intent(this, PlayTime.class);
+                break;
+            case R.id.settingsButton:
+                intent = new Intent(this, SettingsActivity.class);
+                break;
+            case R.id.rulesButton:
+                intent = new Intent(this, RulesActivity.class);
+                break;
+
+            case R.id.leaderboardButton: {
+                if (getApiClient().isConnected())
+                    startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(),
+                            LEADERBOARD_ID_CLASSIC), REQUEST_LEADERBOARD);
+                else if (!getApiClient().isConnecting())
+                    getApiClient().connect();
+            } break;
+            case R.id.achievementsButton: {
+                if (getApiClient().isConnected())
+                    startActivityForResult(Games.Achievements.getAchievementsIntent(getApiClient()), REQUEST_ACHIEVEMENTS);
+                else if (!getApiClient().isConnecting())
+                    getApiClient().connect();
+            } break;
         }
-        else if (view.getId() == R.id.sign_out_button) {
-            signOut();
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_button).setVisibility(View.GONE);
-        }
+
+        if (intent != null) startActivity(intent);
     }
 
     public void onSignInSucceeded() {
@@ -75,41 +113,6 @@ public class MainActivity extends BaseGameActivity implements View.OnClickListen
     public void onSignInFailed() {
         findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
         findViewById(R.id.sign_out_button).setVisibility(View.GONE);
-    }
-
-    public void onPlayClassicBtnClick(View view){
-        Intent playClassicIntent = new Intent(getApplicationContext(), PlayClassic.class);
-        startActivity(playClassicIntent);
-    }
-
-    public void onPlayTimeBtnClick(View view){
-        Intent playTimeIntent = new Intent(getApplicationContext(), PlayTime.class);
-        startActivity(playTimeIntent);
-    }
-
-    public void onSettingsBtnClick(View view){
-        Intent settingsIntent = new Intent(getApplicationContext(), SettingsActivity.class);
-        startActivity(settingsIntent);
-    }
-
-    public void onRulesBtnClick(View view){
-        Intent rulesIntent = new Intent(getApplicationContext(), RulesActivity.class);
-        startActivity(rulesIntent);
-    }
-
-    public void onLeaderboardButtonClick(View view){
-        if (getApiClient().isConnected())
-        startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(),
-                LEADERBOARD_ID_CLASSIC), REQUEST_LEADERBOARD);
-        else if (!getApiClient().isConnecting())
-            getApiClient().connect();
-    }
-
-    public void onAchievementsButtonClick(View view){
-        if (getApiClient().isConnected())
-            startActivityForResult(Games.Achievements.getAchievementsIntent(getApiClient()), REQUEST_ACHIEVEMENTS);
-        else if (!getApiClient().isConnecting())
-            getApiClient().connect();
     }
 
     public void setColorIfNotExist(){

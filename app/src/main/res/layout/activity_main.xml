@@ -32,6 +32,7 @@
                 android:layout_centerInParent="true" />
 
             <Button
+                android:id="@+id/playClassicButton"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:layout_toLeftOf="@id/MainEmptyOne"
@@ -39,10 +40,10 @@
                 android:background="@drawable/xml_ui_button_white"
                 android:textColor="#000000"
                 android:text="@string/classic"
-                android:onClick="onPlayClassicBtnClick"
                 android:textSize="20sp"/>
 
             <Button
+                android:id="@+id/playTimeButton"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:layout_toRightOf="@id/MainEmptyOne"
@@ -50,7 +51,6 @@
                 android:background="@drawable/xml_ui_button_black"
                 android:textColor="#FFFFFF"
                 android:text="@string/time"
-                android:onClick="onPlayTimeBtnClick"
                 android:textSize="20sp"/>
             </RelativeLayout>
         <RelativeLayout
@@ -73,6 +73,7 @@
                 android:orientation="vertical">
 
                 <Button
+                    android:id="@+id/settingsButton"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_alignParentBottom="true"
@@ -80,10 +81,10 @@
                     android:background="@drawable/xml_ui_button_black"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
-                    android:text="@string/settings"
-                    android:onClick="onSettingsBtnClick"/>
+                    android:text="@string/settings" />
 
                 <Button
+                    android:id="@+id/rulesButton"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_alignParentBottom="true"
@@ -91,8 +92,7 @@
                     android:background="@drawable/xml_ui_button_white"
                     android:textColor="#000000"
                     android:textSize="20sp"
-                    android:text="@string/rules"
-                    android:onClick="onRulesBtnClick"/>
+                    android:text="@string/rules" />
 
             </LinearLayout>
 
@@ -103,6 +103,7 @@
                 android:orientation="vertical">
 
                 <Button
+                    android:id="@+id/leaderboardButton"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_alignParentBottom="true"
@@ -110,10 +111,10 @@
                     android:background="@drawable/xml_ui_button_white"
                     android:textColor="#000000"
                     android:textSize="20sp"
-                    android:text="@string/leaderboard"
-                    android:onClick="onLeaderboardButtonClick"/>
+                    android:text="@string/leaderboard" />
 
                 <Button
+                    android:id="@+id/achievementsButton"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_alignParentBottom="true"
@@ -121,8 +122,7 @@
                     android:background="@drawable/xml_ui_button_black"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
-                    android:text="@string/achievements"
-                    android:onClick="onAchievementsButtonClick"/>
+                    android:text="@string/achievements" />
 
                 </LinearLayout>
 
