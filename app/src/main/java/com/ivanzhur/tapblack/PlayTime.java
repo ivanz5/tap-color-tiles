@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -34,11 +33,11 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
 
     Random random;
     ArrayList<Button> buttons, chooseButtons;
-    Map idColor;
+    Map<Integer, String> idColor;
     Button restartButton, shareButton, highScoresButton;
 
     int time = 0;
-    int maxSeconds, maxTiles, seconds, tiles;
+    int maxSeconds, maxTiles, tiles;
     long startTime = 0;
     boolean gameStarted = false;
     CharSequence type = "type";
@@ -58,16 +57,12 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
     final Animation fadeOut = new AlphaAnimation(1, 0);
 
     // Managing local high score
-    public static final String HIGH_SCORES = "highScores";
     public static final String HIGH_SCORE_TIME = "highScoreTime";
     public static final String HIGH_SCORE_TILES = "highScoreTiles";
-    public static final String SOUND = "sound";
     public static final String SOUND_BLUE_TILES = "soundBlueTiles";
     public static final String SOUND_WHITE_TILES = "soundWhiteTiles";
     public static boolean SOUND_BLUE_NULL = false;
     public static boolean SOUND_WHITE_NULL = false;
-    private SharedPreferences highScores, sound;
-    private SharedPreferences.Editor editor;
     final Context context = this;
 
     // Time
@@ -80,7 +75,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
             {
                 time = maxSeconds*1000 - (int)millis;
                 int secs = (int) Math.floor(time / 1000);
-                int centsec = (int) (time/10 - secs*100);
+                int centsec = (time/10 - secs*100);
                 if (centsec < 0) centsec = 0;
                 timerTextView.setText(String.format("%d.%02d", secs, centsec));
 
@@ -91,7 +86,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
             {
                 time = (int)millis;
                 int secs = (int) Math.floor(time / 1000);
-                int centsec = (int) (time/10 - secs*100);
+                int centsec = (time/10 - secs*100);
                 timerTextView.setText(String.format("%d.%02d", secs, centsec));
 
                 timerHandler.postDelayed(this, 10);
@@ -152,10 +147,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
         shareButton = (Button)findViewById(R.id.shareButtonTime);
         highScoresButton = (Button)findViewById(R.id.highScoresButtonTime);
         random = new Random();
-        // Local high score
-        highScores = getSharedPreferences(HIGH_SCORES, getApplicationContext().MODE_MULTI_PROCESS);
-        sound = getSharedPreferences(SOUND, getApplicationContext().MODE_MULTI_PROCESS);
-        editor = highScores.edit();
+
         // Setting tiles and time values
         tiles = 0;
         time = 0;
@@ -208,8 +200,8 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
     {
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
-        int idBlue = sound.getInt(SOUND_BLUE_TILES, 0);
-        int idWhite = sound.getInt(SOUND_WHITE_TILES, 0);
+        int idBlue = MainActivity.sound.getInt(SOUND_BLUE_TILES, 0);
+        int idWhite = MainActivity.sound.getInt(SOUND_WHITE_TILES, 0);
         if (idBlue != 0) mediaPlayerBlue = MediaPlayer.create(getApplicationContext(), idBlue);
         else SOUND_BLUE_NULL = true;
         if (idWhite != 0) mediaPlayerWhite = MediaPlayer.create(getApplicationContext(), idWhite);
@@ -239,7 +231,8 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
                         String buttonText = ((Button) v).getText().toString();
                         maxSeconds = Integer.parseInt(buttonText);
                         maxTiles = -1;
-                        timerTextView.setText(maxSeconds + ".00");
+                        String timerStr = maxSeconds + ".00";
+                        timerTextView.setText(timerStr);
                     }
                     else
                     {
@@ -247,7 +240,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
                         String buttonText = ((Button) v).getText().toString();
                         maxTiles = Integer.parseInt(buttonText);
                         maxSeconds = -1;
-                        tilesTextView.setText(maxTiles + "");
+                        tilesTextView.setText(String.valueOf(maxTiles));
                     }
 
                     chooseLayout.startAnimation(fadeOut);
@@ -268,8 +261,8 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
                 public void onClick(View v) {
                     // Handle button click
                     // If button is black
-                    if (idColor.get(v.getId()) == "black") {
-                        if (gameStarted == false) // If game not started yet
+                    if (idColor.get(v.getId()).equals("black")) {
+                        if (!gameStarted) // If game not started yet
                         {
                             startTime = System.currentTimeMillis();
                             timerHandler.postDelayed(timerRunnable, 0);
@@ -278,16 +271,16 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
                         if (type == "tile") // If type 'tiles'
                         {
                             if (tiles >= maxTiles - 1) gameOver(time);
-                            tilesTextView.setText(maxTiles - tiles - 1 + "");
+                            tilesTextView.setText(String.valueOf(maxTiles - tiles - 1));
                         }
                         else
                         {
-                            tilesTextView.setText(tiles + 1 + "");
+                            tilesTextView.setText(String.valueOf(tiles + 1));
                         }
 
                         // Generate new black tile
                         int nb = random.nextInt(4);
-                        while (idColor.get(buttons.get(nb).getId()) == "black")
+                        while (idColor.get(buttons.get(nb).getId()).equals("black"))
                             nb = random.nextInt(4);
                         changeState(v);
                         changeState(buttons.get(nb));
@@ -308,7 +301,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
 
     public void changeState(View view)
     {
-        if (idColor.get(view.getId()) == "black")
+        if (idColor.get(view.getId()).equals("black"))
         {
             view.setBackgroundResource(R.drawable.xml_big_button_white);
             idColor.put(view.getId(), "white");
@@ -323,7 +316,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
     // Restart button
     public void restartClicked(View view)
     {
-        timerTextView.setText("0.00");
+        timerTextView.setText(String.valueOf("0.00"));
         tilesTextView.setText("0");
         scoreLayout.clearAnimation();
         scoreLayout.setClickable(false);
@@ -344,7 +337,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
     // Share button
     public void shareClicked(View view)
     {
-        CharSequence text = "I stayed for " + scoreTextView.getText() + " in Tap Black! Can you beat me? http://vk.com/i.zhur";
+        CharSequence text;
         if (scoreTextView.getText() == getResources().getString(R.string.fail))
         {
             text = getResources().getString(R.string.i_failed);
@@ -357,7 +350,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
         else
         {
             int secs = (int) Math.floor(time / 1000);
-            int centsec = (int) (time/10 - secs*100);
+            int centsec = (time/10 - secs*100);
             text = getResources().getString(R.string.i_have_clicked) + maxTiles +
                     getResources().getString(R.string.tiles_just_in) + secs + "." + centsec + getResources().getString(R.string.seconds_can_faster);
         }
@@ -403,12 +396,12 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
 
                 setChooseButtons(false);
                 for (int i=0; i<4; i++)
-                    if (highScores.contains(HIGH_SCORE_TIME + chooseButtons.get(i).getText()))
-                        editor.remove(HIGH_SCORE_TIME + chooseButtons.get(i).getText());
+                    if (MainActivity.highScores.contains(HIGH_SCORE_TIME + chooseButtons.get(i).getText()))
+                        MainActivity.editorHighScores.remove(HIGH_SCORE_TIME + chooseButtons.get(i).getText());
                 for (int i=4; i<8; i++)
-                    if (highScores.contains(HIGH_SCORE_TILES + chooseButtons.get(i).getText()))
-                        editor.remove(HIGH_SCORE_TILES + chooseButtons.get(i).getText());
-                editor.apply();
+                    if (MainActivity.highScores.contains(HIGH_SCORE_TILES + chooseButtons.get(i).getText()))
+                        MainActivity.editorHighScores.remove(HIGH_SCORE_TILES + chooseButtons.get(i).getText());
+                MainActivity.editorHighScores.apply();
 
                 Button showButton = (Button)findViewById(R.id.TimeShowHighScore);
                 showButton.setVisibility(View.VISIBLE);
@@ -431,43 +424,44 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
         {
             // Showing score
             int secs = (int) Math.floor(result / 1000);
-            int centsec = (int) (result/10 - secs*100);
-            scoreTextView.setText(String.format("%d.%02d", secs, centsec) + getResources().getString(R.string.second_sign));
+            int centsec = (result/10 - secs*100);
+            scoreTextView.setText(String.format("%d.%02d%s", secs, centsec, getResources().getString(R.string.second_sign)));
+            // FIXME: 15/12/2015 up
 
             // Updating high score
-            if (highScores.contains(HIGH_SCORE_TILES + maxTiles))
+            if (MainActivity.highScores.contains(HIGH_SCORE_TILES + maxTiles))
             {
-                int currentHigh = highScores.getInt(HIGH_SCORE_TILES + maxTiles, 0);
+                int currentHigh = MainActivity.highScores.getInt(HIGH_SCORE_TILES + maxTiles, 0);
                 if (currentHigh > result) // If need update
                 {
-                    editor.putInt(HIGH_SCORE_TILES + maxTiles, result);
-                    editor.apply();
+                    MainActivity.editorHighScores.putInt(HIGH_SCORE_TILES + maxTiles, result);
+                    MainActivity.editorHighScores.apply();
                 }
             }
             else // If not exist
             {
-                editor.putInt(HIGH_SCORE_TILES + maxTiles, result);
-                editor.apply();
+                MainActivity.editorHighScores.putInt(HIGH_SCORE_TILES + maxTiles, result);
+                MainActivity.editorHighScores.apply();
             }
         }
         else // TIME mode
         {
             // Showing score
-            scoreTextView.setText(result + "");
+            scoreTextView.setText(String.valueOf(result));
 
-            if (highScores.contains(HIGH_SCORE_TIME + maxSeconds))
+            if (MainActivity.highScores.contains(HIGH_SCORE_TIME + maxSeconds))
             {
-                int currentHigh = highScores.getInt(HIGH_SCORE_TIME + maxSeconds, 0);
+                int currentHigh = MainActivity.highScores.getInt(HIGH_SCORE_TIME + maxSeconds, 0);
                 if (currentHigh < result) // If need update
                 {
-                    editor.putInt(HIGH_SCORE_TIME + maxSeconds, result);
-                    editor.apply();
+                    MainActivity.editorHighScores.putInt(HIGH_SCORE_TIME + maxSeconds, result);
+                    MainActivity.editorHighScores.apply();
                 }
             }
             else // If not exist
             {
-                editor.putInt(HIGH_SCORE_TIME + maxSeconds, result);
-                editor.apply();
+                MainActivity.editorHighScores.putInt(HIGH_SCORE_TIME + maxSeconds, result);
+                MainActivity.editorHighScores.apply();
             }
         }
 
@@ -513,14 +507,14 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
         {
             for (int i=0; i<4; i++) {
                 String newLabel = labels.get(i) + ": ";
-                if (!highScores.contains(HIGH_SCORE_TIME + labels.get(i))) newLabel = newLabel + getResources().getString(R.string.n_a);
-                else newLabel = newLabel + highScores.getInt(HIGH_SCORE_TIME + labels.get(i), 0);
+                if (!MainActivity.highScores.contains(HIGH_SCORE_TIME + labels.get(i))) newLabel = newLabel + getResources().getString(R.string.n_a);
+                else newLabel = newLabel + MainActivity.highScores.getInt(HIGH_SCORE_TIME + labels.get(i), 0);
                 labels.set(i, newLabel);
             }
             for (int i=4; i<8; i++) {
                 String newLabel = labels.get(i) + ": ";
-                if (!highScores.contains(HIGH_SCORE_TILES + labels.get(i))) newLabel = newLabel + getResources().getString(R.string.n_a);
-                else newLabel = newLabel + convertTimeFromMillis(highScores.getInt(HIGH_SCORE_TILES + labels.get(i), 0));
+                if (!MainActivity.highScores.contains(HIGH_SCORE_TILES + labels.get(i))) newLabel = newLabel + getResources().getString(R.string.n_a);
+                else newLabel = newLabel + convertTimeFromMillis(MainActivity.highScores.getInt(HIGH_SCORE_TILES + labels.get(i), 0));
                 labels.set(i, newLabel);
             }
         }
@@ -531,7 +525,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
     public String convertTimeFromMillis(int millis)
     {
         int sec = (int)Math.floor(millis/1000);
-        int cent = (int)((millis - sec*1000)/10);
+        int cent = ((millis - sec*1000)/10);
         return (sec + "." + cent);
     }
 }
