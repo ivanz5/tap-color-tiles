@@ -1,0 +1,274 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ivanzhur.tapblack.MainActivity"
+    android:orientation="vertical"
+    android:background="#222222">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="2dp"
+        android:layout_weight="1">
+
+    <Button
+        android:id="@+id/settingsSound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/xml_ui_button_red"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:text="@string/sound"/>
+
+    <Button
+        android:id="@+id/settingsColor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/xml_ui_button_white"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:text="@string/colors"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/settingsScreenSound"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:visibility="visible"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginRight="1dp">
+
+            <Button
+                android:id="@+id/settingsSoundBlueCaption"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.05"
+                android:background="@drawable/xml_ui_button_white"
+                android:textColor="#000000"
+                android:textSize="19sp"
+                android:text="@string/color_tiles"
+                android:clickable="false"/>
+
+            <Button
+                android:id="@+id/settingsSoundBlueNone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/xml_ui_button_white"
+                android:layout_marginTop="1dp"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:text="@string/none"/>
+
+            <Button
+                android:id="@+id/settingsSoundBlue1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/xml_ui_button_white"
+                android:layout_marginTop="1dp"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:text="1"/>
+
+            <Button
+                android:id="@+id/settingsSoundBlue2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/xml_ui_button_white"
+                android:layout_marginTop="1dp"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:text="2"/>
+
+            <Button
+                android:id="@+id/settingsSoundBlue3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/xml_ui_button_white"
+                android:layout_marginTop="1dp"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:text="3"/>
+
+            <Button
+                android:id="@+id/settingsSoundBlue4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/xml_ui_button_white"
+                android:layout_marginTop="1dp"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:text="4"/>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/settingsSoundWhiteCaption"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.05"
+                android:background="@drawable/xml_ui_button_white"
+                android:textColor="#000000"
+                android:textSize="19sp"
+                android:text="@string/white_tiles"
+                android:clickable="false"/>
+
+            <Button
+                android:id="@+id/settingsSoundWhiteNone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/xml_ui_button_white"
+                android:layout_marginTop="1dp"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:text="@string/none"/>
+
+            <Button
+                android:id="@+id/settingsSoundWhite1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/xml_ui_button_white"
+                android:layout_marginTop="1dp"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:text="1"/>
+
+            <Button
+                android:id="@+id/settingsSoundWhite2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/xml_ui_button_white"
+                android:layout_marginTop="1dp"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:text="2"/>
+
+            <Button
+                android:id="@+id/settingsSoundWhite3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/xml_ui_button_white"
+                android:layout_marginTop="1dp"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:text="3"/>
+
+            <Button
+                android:id="@+id/settingsSoundWhite4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/xml_ui_button_white"
+                android:layout_marginTop="1dp"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:text="4"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/settingsScreenColors"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginRight="1dp">
+
+            <Button
+                android:id="@+id/settingsColorCaption"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:background="#FFFFFF"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:text="@string/select_tiles_color"
+                android:clickable="false"/>
+
+            <Button
+                android:id="@+id/settingsColorBlue"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#1248e6"
+                android:layout_marginTop="1dp"/>
+
+            <Button
+                android:id="@+id/settingsColorDarkBlue"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#16389e"
+                android:layout_marginTop="1dp"/>
+
+            <Button
+                android:id="@+id/settingsColorGreen"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#1b786c"
+                android:layout_marginTop="1dp"/>
+
+            <Button
+                android:id="@+id/settingsColorDarkGreen"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#106117"
+                android:layout_marginTop="1dp"/>
+
+            <Button
+                android:id="@+id/settingsColorRed"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#000000"
+                android:layout_marginTop="1dp"/>
+
+            <Button
+                android:id="@+id/settingsColorYellow"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#f4f71d"
+                android:layout_marginTop="1dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,151 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ivanzhur.tapblack.MainActivity"
+    android:background="#564444" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="70dp" >
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:id="@+id/RowTwo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FF8833" >
+
+            <View
+                android:id="@+id/MainEmptyOne"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <Button
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@id/MainEmptyOne"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_white"
+                android:textColor="#000000"
+                android:text="@string/classic"
+                android:onClick="onPlayClassicBtnClick"
+                android:textSize="20sp"/>
+
+            <Button
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/MainEmptyOne"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_black"
+                android:textColor="#FFFFFF"
+                android:text="@string/time"
+                android:onClick="onPlayTimeBtnClick"
+                android:textSize="20sp"/>
+            </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/opponent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FF8833" >
+
+            <View
+                android:id="@+id/MainEmptyTwo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@id/MainEmptyTwo"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/xml_ui_button_black"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:text="@string/settings"
+                    android:onClick="onSettingsBtnClick"/>
+
+                <Button
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/xml_ui_button_white"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:text="@string/rules"
+                    android:onClick="onRulesBtnClick"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/MainEmptyTwo"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/xml_ui_button_white"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:text="@string/leaderboard"
+                    android:onClick="onLeaderboardButtonClick"/>
+
+                <Button
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/xml_ui_button_black"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:text="@string/achievements"
+                    android:onClick="onAchievementsButtonClick"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        <Button
+            android:id="@+id/sign_out_button"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/common_signin_btn_text_light"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:text="@string/sign_out"/>
+    </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
+
+</RelativeLayout>

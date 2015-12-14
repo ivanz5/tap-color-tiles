@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Google Play game services IDs.
+Save this file as res/values/games-ids.xml in your project.
+-->
+<resources>
+    <string name="app_id" translatable="false">144755683602</string>
+    <string name="achievement_no_space" translatable="false">CgkIkuLxoJsEEAIQBA</string>
+    <string name="achievement_newbie" translatable="false">CgkIkuLxoJsEEAIQAw</string>
+    <string name="achievement_busy_fingers" translatable="false">CgkIkuLxoJsEEAIQCA</string>
+    <string name="achievement_serious_play" translatable="false">CgkIkuLxoJsEEAIQCQ</string>
+    <string name="achievement_geek_gamer" translatable="false">CgkIkuLxoJsEEAIQCg</string>
+    <string name="achievement_beginner" translatable="false">CgkIkuLxoJsEEAIQAg</string>
+    <string name="achievement_expert" translatable="false">CgkIkuLxoJsEEAIQBQ</string>
+    <string name="achievement_master_tapper" translatable="false">CgkIkuLxoJsEEAIQBg</string>
+    <string name="achievement_devil" translatable="false">CgkIkuLxoJsEEAIQBw</string>
+    <string name="achievement_cheater" translatable="false">CgkIkuLxoJsEEAIQCw</string>
+    <string name="leaderboard_classic_mode" translatable="false">CgkIkuLxoJsEEAIQAQ</string>
+</resources>

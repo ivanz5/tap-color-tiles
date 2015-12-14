@@ -1,0 +1,723 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ivanzhur.tapblack.MainActivity"
+    android:background="#564444" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="70dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.18">
+
+            <View
+                android:id="@+id/EmptyHeadTime"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"/>
+
+            <TextView
+                android:id="@+id/timeModeTimeTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_toLeftOf="@+id/EmptyHeadTime"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:text="0.00"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/timeModeTilesTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textAlignment="viewEnd"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toRightOf="@id/EmptyHeadTime"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:text="0"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/RowOneTime"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FF8833" >
+
+            <View
+                android:id="@+id/TimeEmptyTop"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <Button
+                android:id="@+id/TwoByTwoTopLeft"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@id/TimeEmptyTop"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_big_button_white"/>
+
+            <Button
+                android:id="@+id/TwoByTwoTopRight"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/TimeEmptyTop"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_big_button_white"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/RowTwoTime"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FF8833" >
+
+            <View
+                android:id="@+id/TimeEmptyBottom"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <Button
+                android:id="@+id/TwoByTwoBottomLeft"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@id/TimeEmptyBottom"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_big_button_white"/>
+
+            <Button
+                android:id="@+id/TwoByTwoBottomRight"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/TimeEmptyBottom"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_big_button_white"/>
+
+        </RelativeLayout>
+        <!--<RelativeLayout
+            android:id="@+id/RowOneTime"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FF8833" >
+
+            <View
+                android:id="@+id/EmptyOneTime"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/EmptyOneTime">
+
+                <View
+                    android:id="@+id/EmptyOne1Time"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"/>
+
+                <Button
+                    android:id="@+id/RowOneBtn1Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toLeftOf="@id/EmptyOne1Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+                <Button
+                    android:id="@+id/RowOneBtn2Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toRightOf="@id/EmptyOne1Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/EmptyOneTime">
+
+                <View
+                    android:id="@+id/EmptyOne2Time"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"/>
+
+                <Button
+                    android:id="@+id/RowOneBtn3Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toLeftOf="@id/EmptyOne2Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+                <Button
+                    android:id="@+id/RowOneBtn4Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toRightOf="@id/EmptyOne2Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/RowTwoTime"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FF8833" >
+
+            <View
+                android:id="@+id/EmptyTwoTime"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/EmptyTwoTime">
+
+                <View
+                    android:id="@+id/EmptyTwo1Time"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"/>
+
+                <Button
+                    android:id="@+id/RowTwoBtn1Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toLeftOf="@id/EmptyTwo1Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+                <Button
+                    android:id="@+id/RowTwoBtn2Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toRightOf="@id/EmptyTwo1Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/EmptyTwoTime">
+
+                <View
+                    android:id="@+id/EmptyTwo2Time"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"/>
+
+                <Button
+                    android:id="@+id/RowTwoBtn3Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toLeftOf="@id/EmptyTwo2Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+                <Button
+                    android:id="@+id/RowTwoBtn4Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toRightOf="@id/EmptyTwo2Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/RowThreeTime"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FF8833" >
+
+            <View
+                android:id="@+id/EmptyThreeTime"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/EmptyThreeTime">
+
+                <View
+                    android:id="@+id/EmptyThree1Time"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"/>
+
+                <Button
+                    android:id="@+id/RowThreeBtn1Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toLeftOf="@id/EmptyThree1Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+                <Button
+                    android:id="@+id/RowThreeBtn2Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toRightOf="@id/EmptyThree1Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/EmptyThreeTime">
+
+                <View
+                    android:id="@+id/EmptyThree2Time"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"/>
+
+                <Button
+                    android:id="@+id/RowThreeBtn3Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toLeftOf="@id/EmptyThree2Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+                <Button
+                    android:id="@+id/RowThreeBtn4Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toRightOf="@id/EmptyThree2Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/RowFourTime"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FF8833" >
+
+            <View
+                android:id="@+id/EmptyFourTime"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/EmptyFourTime">
+
+                <View
+                    android:id="@+id/EmptyFour1Time"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"/>
+
+                <Button
+                    android:id="@+id/RowFourBtn1Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toLeftOf="@id/EmptyFour1Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+                <Button
+                    android:id="@+id/RowFourBtn2Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toRightOf="@id/EmptyFour1Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/EmptyFourTime">
+
+                <View
+                    android:id="@+id/EmptyFour2Time"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"/>
+
+                <Button
+                    android:id="@+id/RowFourBtn3Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toLeftOf="@id/EmptyFour2Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+                <Button
+                    android:id="@+id/RowFourBtn4Time"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_toRightOf="@id/EmptyFour2Time"
+                    android:layout_alignParentBottom="true"
+                    android:background="@xml/button_white" />
+
+            </RelativeLayout>
+        </RelativeLayout>-->
+    </LinearLayout>
+
+    <!-- Score screen -->
+    <LinearLayout
+        android:id="@+id/scoreScreenTime"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp"
+        android:visibility="invisible"
+        android:orientation="vertical"
+        android:clickable="false"
+        android:background="#324529">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            android:background="#FFFFFF">
+
+            <TextView
+                android:id="@+id/timeModeScoreTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12.95 s"
+                android:textSize="50dp"
+                android:textColor="#000000"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2">
+
+            <Button
+                android:id="@+id/restartButtonTime"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_black"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:text="@string/restart"
+                android:onClick="restartClicked"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2">
+
+            <Button
+                android:id="@+id/shareButtonTime"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_white"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:text="@string/share"
+                android:onClick="shareClicked"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2">
+
+            <Button
+                android:id="@+id/highScoresButtonTime"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_black"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:text="@string/high_scores"
+                android:onClick="highScoresClicked"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!-- Time selection layout -->
+    <LinearLayout
+        android:id="@+id/chooseScreenTime"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp"
+        android:visibility="visible"
+        android:orientation="vertical"
+        android:clickable="false">
+
+        <RelativeLayout
+            android:id="@+id/headersTime"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FF8833">
+
+            <View
+                android:id="@+id/TimeEmptyOne"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <Button
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@id/TimeEmptyOne"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_black"
+                android:textColor="#FFFFFF"
+                android:text="@string/seconds"
+                android:clickable="false"
+                android:textSize="20sp"/>
+
+            <Button
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/TimeEmptyOne"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_white"
+                android:textColor="#000000"
+                android:text="@string/tiles"
+                android:clickable="false"
+                android:textSize="20sp"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/timeVariantsRow2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FF8833" >
+
+            <View
+                android:id="@+id/TimeEmptyTwo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <Button
+                android:id="@+id/TimeChooseSeconds1"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@id/TimeEmptyTwo"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_white"
+                android:textColor="#000000"
+                android:text="10"
+                android:textSize="20sp"/>
+
+            <Button
+                android:id="@+id/TimeChooseTiles1"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/TimeEmptyTwo"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_black"
+                android:textColor="#FFFFFF"
+                android:text="20"
+                android:textSize="20sp"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/timeVariantsRow3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FF8833" >
+
+            <View
+                android:id="@+id/TimeEmptyThree"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <Button
+                android:id="@+id/TimeChooseSeconds2"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@id/TimeEmptyThree"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_black"
+                android:textColor="#FFFFFF"
+                android:text="20"
+                android:textSize="20sp"/>
+
+            <Button
+                android:id="@+id/TimeChooseTiles2"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/TimeEmptyThree"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_white"
+                android:textColor="#000000"
+                android:text="40"
+                android:textSize="20sp"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/timeVariantsRow4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FF8833" >
+
+            <View
+                android:id="@+id/TimeEmptyFour"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <Button
+                android:id="@+id/TimeChooseSeconds3"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@id/TimeEmptyFour"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_white"
+                android:textColor="#000000"
+                android:text="30"
+                android:textSize="20sp"/>
+
+            <Button
+                android:id="@+id/TimeChooseTiles3"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/TimeEmptyFour"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_black"
+                android:textColor="#FFFFFF"
+                android:text="60"
+                android:textSize="20sp"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/timeVariantsRow5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FF8833" >
+
+            <View
+                android:id="@+id/TimeEmptyFive"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <Button
+                android:id="@+id/TimeChooseSeconds4"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@id/TimeEmptyFive"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_black"
+                android:textColor="#FFFFFF"
+                android:text="45"
+                android:textSize="20sp"/>
+
+            <Button
+                android:id="@+id/TimeChooseTiles4"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/TimeEmptyFive"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_white"
+                android:textColor="#000000"
+                android:text="90"
+                android:textSize="20sp"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/timeVariantsRow6"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:background="#564444" >
+
+            <View
+                android:id="@+id/TimeEmptyHighScoreButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+            <Button
+                android:id="@+id/TimeResetHighScore"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@id/TimeEmptyHighScoreButton"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_red"
+                android:textColor="#FFFFFF"
+                android:text="@string/reset_all"
+                android:textSize="20sp"
+                android:onClick="resetHighScoreClicked"/>
+
+            <Button
+                android:id="@+id/TimeHideHighScore"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/TimeEmptyHighScoreButton"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_black"
+                android:textColor="#FFFFFF"
+                android:text="@string/hide"
+                android:textSize="20sp"
+                android:onClick="hideHighScoreClicked"/>
+
+            <Button
+                android:id="@+id/TimeShowHighScore"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/xml_ui_button_red"
+                android:textColor="#FFFFFF"
+                android:text="@string/show_high_score"
+                android:textSize="20sp"
+                android:onClick="showHighScoreClicked"
+                android:visibility="visible"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
+
+</RelativeLayout>
