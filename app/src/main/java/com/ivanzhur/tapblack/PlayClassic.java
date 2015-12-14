@@ -176,7 +176,7 @@ public class PlayClassic extends BaseGameActivity {
 
     public void setColor()
     {
-        tileColor = MainActivity.parameters.getString(TILE_COLOR, "#1248e6");
+        tileColor = App.parameters.getString(TILE_COLOR, "#1248e6");
     }
 
     public void setAudio()
@@ -224,14 +224,14 @@ public class PlayClassic extends BaseGameActivity {
                             numBlack--;
                         }
 
-                        MainActivity.playSound(MainActivity.soundIdBlue);
+                        App.playSound(App.soundIdBlue);
                         tiles++;
                         timerTextView.setText(String.valueOf(tiles));
                     }
                     // If button is white
                     else {
                         v.setBackgroundColor(Color.parseColor("#FF0000"));
-                        MainActivity.playSound(MainActivity.soundIdWhite);
+                        App.playSound(App.soundIdWhite);
                         gameOver();
                     }
                 }
@@ -244,15 +244,15 @@ public class PlayClassic extends BaseGameActivity {
         bestScoreTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!MainActivity.highScores.contains(HIGH_SCORE_CLASSIC)) return;
+                if (!App.highScores.contains(HIGH_SCORE_CLASSIC)) return;
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle(R.string.reset)
                         .setMessage(R.string.reset_classic);
                 builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        MainActivity.editorHighScores.remove(HIGH_SCORE_CLASSIC);
-                        MainActivity.editorHighScores.apply();
+                        App.editorHighScores.remove(HIGH_SCORE_CLASSIC);
+                        App.editorHighScores.apply();
                         String bestScoreStr = getResources().getString(R.string.best_score) + getResources().getString(R.string.n_a);
                         bestScoreTextView.setText(bestScoreStr);
                     }
@@ -341,37 +341,37 @@ public class PlayClassic extends BaseGameActivity {
         scoreLayout.setVisibility(View.VISIBLE);
 
         // Updating high score
-        if (MainActivity.highScores.contains(HIGH_SCORE_CLASSIC))
+        if (App.highScores.contains(HIGH_SCORE_CLASSIC))
         {
-            int currentHigh = MainActivity.highScores.getInt(HIGH_SCORE_CLASSIC, 0);
+            int currentHigh = App.highScores.getInt(HIGH_SCORE_CLASSIC, 0);
             if (currentHigh < tiles) // If need update
             {
-                MainActivity.editorHighScores.putInt(HIGH_SCORE_CLASSIC, tiles);
-                MainActivity.editorHighScores.apply();
+                App.editorHighScores.putInt(HIGH_SCORE_CLASSIC, tiles);
+                App.editorHighScores.apply();
             }
         }
         else // If not exist
         {
-            MainActivity.editorHighScores.putInt(HIGH_SCORE_CLASSIC, tiles);
-            MainActivity.editorHighScores.apply();
+            App.editorHighScores.putInt(HIGH_SCORE_CLASSIC, tiles);
+            App.editorHighScores.apply();
         }
 
         // Updating number of games played
-        if (MainActivity.parameters.contains(NUMBER_GAMES_PLAYED))
+        if (App.parameters.contains(NUMBER_GAMES_PLAYED))
         {
-            int games = MainActivity.parameters.getInt(NUMBER_GAMES_PLAYED, 0) + 1;
-            MainActivity.editorParameters.putInt(NUMBER_GAMES_PLAYED, games);
-            MainActivity.editorParameters.apply();
+            int games = App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) + 1;
+            App.editorParameters.putInt(NUMBER_GAMES_PLAYED, games);
+            App.editorParameters.apply();
         }
         else
         {
-            MainActivity.editorParameters.putInt(NUMBER_GAMES_PLAYED, 1);
-            MainActivity.editorParameters.apply();
+            App.editorParameters.putInt(NUMBER_GAMES_PLAYED, 1);
+            App.editorParameters.apply();
         }
-        //Toast.makeText(getApplicationContext(), MainActivity.parameters.getInt(NUMBER_GAMES_PLAYED, 0), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), App.parameters.getInt(NUMBER_GAMES_PLAYED, 0), Toast.LENGTH_SHORT).show();
         askForRating();
 
-        String bestScoreStr = getResources().getString(R.string.best_score) + MainActivity.highScores.getInt(HIGH_SCORE_CLASSIC, 0);
+        String bestScoreStr = getResources().getString(R.string.best_score) + App.highScores.getInt(HIGH_SCORE_CLASSIC, 0);
         bestScoreTextView.setText(bestScoreStr);
 
         // Update leaderboard and achievements
@@ -383,10 +383,10 @@ public class PlayClassic extends BaseGameActivity {
             if (tiles == 666) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_devil));
             if (tiles >= 1000) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_cheater));
             if (numBlack > 15) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_no_space));
-            if (MainActivity.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 10) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_newbie));
-            if (MainActivity.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 100) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_busy_fingers));
-            if (MainActivity.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 500) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_serious_play));
-            if (MainActivity.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 1000) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_geek_gamer));
+            if (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 10) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_newbie));
+            if (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 100) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_busy_fingers));
+            if (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 500) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_serious_play));
+            if (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 1000) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_geek_gamer));
         }
 
     }
@@ -418,9 +418,9 @@ public class PlayClassic extends BaseGameActivity {
 
     public void askForRating()
     {
-        if (MainActivity.parameters.contains(RATE_ASKED))
+        if (App.parameters.contains(RATE_ASKED))
         {
-            if ((MainActivity.parameters.getInt(RATE_ASKED, 0) == -1) && (MainActivity.parameters.getInt(NUMBER_GAMES_PLAYED, 0) > 40))
+            if ((App.parameters.getInt(RATE_ASKED, 0) == -1) && (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) > 40))
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle(R.string.rate_this_app)
@@ -437,14 +437,14 @@ public class PlayClassic extends BaseGameActivity {
                             if (!isActivityStarted(rateIntent))
                                 Toast.makeText(getApplicationContext(), getString(R.string.could_not_open_play_store), Toast.LENGTH_SHORT).show();
                         }
-                        MainActivity.editorParameters.putInt(RATE_ASKED, 1);
+                        App.editorParameters.putInt(RATE_ASKED, 1);
                     }
                 }); //endregion
                 //region NO
                 builder.setNegativeButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        MainActivity.editorParameters.putInt(RATE_ASKED, 0);
+                        App.editorParameters.putInt(RATE_ASKED, 0);
                     }
                 });
                 //endregion
@@ -454,9 +454,9 @@ public class PlayClassic extends BaseGameActivity {
         }
         else
         {
-            MainActivity.editorParameters.putInt(RATE_ASKED, -1);
+            App.editorParameters.putInt(RATE_ASKED, -1);
         }
-        MainActivity.editorParameters.apply();
+        App.editorParameters.apply();
     }
 
     private boolean isActivityStarted(Intent activityIntent)

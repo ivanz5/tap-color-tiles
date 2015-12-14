@@ -2,10 +2,6 @@ package com.ivanzhur.tapblack;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -25,21 +21,8 @@ public class MainActivity extends BaseGameActivity implements View.OnClickListen
     private static final int REQUEST_ACHIEVEMENTS = 1;
 
     // Variables for sound and color
-    public static final String SOUND = "com.ivanzhur.tapblack.sound";
-    public static final String PARAMETERS = "com.ivanzhur.tapblack.parameters";
-    public static final String HIGH_SCORES = "com.ivanzhur.tapblack.highScores";
-    public static final String SOUND_BLUE_TILES = "soundBlueTiles";
-    public static final String SOUND_WHITE_TILES = "soundWhiteTiles";
-    public static final String SOUND_BLUE_SELECTED = "soundBlueSelected";
-    public static final String SOUND_WHITE_SELECTED = "soundWhiteSelected";
     public static final String TILE_COLOR = "tileColor";
     public static final String SELECTED_COLOR = "selectedColor";
-    static SharedPreferences sound, parameters, highScores;
-    static SharedPreferences.Editor editorSound, editorParameters, editorHighScores;
-    static AudioManager audioManager;
-    static SoundPool soundPool;
-    static int soundIdBlue, soundIdWhite;
-    static boolean playWhenLoaded;
     static Context context;
 
     @Override
@@ -68,12 +51,7 @@ public class MainActivity extends BaseGameActivity implements View.OnClickListen
         findViewById(R.id.sign_out_button).setVisibility(View.GONE);
 
         context = this;
-        setSoundIfNotExist();
         setColorIfNotExist();
-
-        highScores = getSharedPreferences(HIGH_SCORES, MODE_PRIVATE);
-        editorHighScores = highScores.edit();
-        editorHighScores.apply();
     }
 
     @Override
@@ -134,72 +112,11 @@ public class MainActivity extends BaseGameActivity implements View.OnClickListen
             getApiClient().connect();
     }
 
-    @SuppressWarnings("deprecation")
-    public void setSoundIfNotExist(){
-        audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        sound = context.getSharedPreferences(SOUND, MODE_PRIVATE);
-        editorSound = sound.edit();
-        if (!sound.contains(SOUND_BLUE_TILES)){
-            editorSound.putInt(SOUND_BLUE_TILES, R.raw.click_blue_1);
-            editorSound.putInt(SOUND_WHITE_TILES, R.raw.click_white_1);
-            editorSound.putInt(SOUND_BLUE_SELECTED, 1);
-            editorSound.putInt(SOUND_WHITE_SELECTED, 1);
-            editorSound.apply();
-        }
-
-        int soundRawIdBlue = sound.getInt(SOUND_BLUE_TILES, 0);
-        int soundRawIdWhite = sound.getInt(SOUND_WHITE_TILES, 0);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_GAME)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build();
-            soundPool = new SoundPool.Builder()
-                    .setAudioAttributes(audioAttributes)
-                    .build();
-        }
-        else { // Old APIs
-            soundPool = new SoundPool(2, AudioManager.STREAM_DTMF, 0);
-        }
-
-        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-            @Override
-            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                if (playWhenLoaded) playSound(sampleId);
-                playWhenLoaded = false;
-            }
-        });
-
-        playWhenLoaded = false;
-        if (soundRawIdBlue != 0) soundIdBlue = soundPool.load(context, soundRawIdBlue, 1);
-        else soundIdBlue = -1;
-        if (soundRawIdWhite != 0) soundIdWhite = soundPool.load(context, soundRawIdWhite, 1);
-        else soundIdWhite = -1;
-    }
-
-    public static void reloadAndPlay(int id, int resId){
-        soundPool.unload(id);
-        if (resId == 0) return;
-        playWhenLoaded = true;
-        if (id == MainActivity.soundIdBlue) MainActivity.soundIdBlue = soundPool.load(context, resId, 1);
-        if (id == MainActivity.soundIdWhite) MainActivity.soundIdWhite = soundPool.load(context, resId, 1);
-    }
-
-    public static void playSound(int soundId){
-        float actVolume = (float) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-        float maxVolume = (float) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        float volume = actVolume / maxVolume;
-        if (soundId != -1) soundPool.play(soundId, volume, volume, 1, 0, 1f);
-    }
-
     public void setColorIfNotExist(){
-        parameters = getSharedPreferences(PARAMETERS, MODE_PRIVATE);
-        editorParameters = parameters.edit();
-        if (!parameters.contains(TILE_COLOR)){
-            editorParameters.putString(TILE_COLOR, "#1248e6");
-            editorParameters.putInt(SELECTED_COLOR, 0);
-            editorParameters.apply();
+        if (!App.parameters.contains(TILE_COLOR)){
+            App.editorParameters.putString(TILE_COLOR, "#1248e6");
+            App.editorParameters.putInt(SELECTED_COLOR, 0);
+            App.editorParameters.apply();
         }
     }
 }

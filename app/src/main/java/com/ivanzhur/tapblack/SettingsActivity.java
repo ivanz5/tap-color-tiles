@@ -87,36 +87,36 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
         //region if (type == "blue")
         if (type.equals("blue"))
         {
-            MainActivity.editorSound.putInt(SOUND_BLUE_TILES, id);
-            MainActivity.editorSound.putInt(SOUND_BLUE_SELECTED, num);
+            App.editorSound.putInt(SOUND_BLUE_TILES, id);
+            App.editorSound.putInt(SOUND_BLUE_SELECTED, num);
             for (int i=0; i<5; i++){
                 buttons_blue.get(i).setBackgroundResource(R.drawable.xml_ui_button_white);
                 buttons_blue.get(i).setTextColor(Color.parseColor("#000000"));
             }
 
-            MainActivity.reloadAndPlay(MainActivity.soundIdBlue, id);
+            App.reloadAndPlay(App.soundIdBlue, id);
         }
         //endregion
         //region else if (type == "white")
         else if (type.equals("white"))
         {
-            MainActivity.editorSound.putInt(SOUND_WHITE_TILES, id);
-            MainActivity.editorSound.putInt(SOUND_WHITE_SELECTED, num);
-            MainActivity.editorSound.apply();
+            App.editorSound.putInt(SOUND_WHITE_TILES, id);
+            App.editorSound.putInt(SOUND_WHITE_SELECTED, num);
+            App.editorSound.apply();
             for (int i=0; i<5; i++){
                 buttons_white.get(i).setBackgroundResource(R.drawable.xml_ui_button_white);
                 buttons_white.get(i).setTextColor(Color.parseColor("#000000"));
             }
 
-            MainActivity.reloadAndPlay(MainActivity.soundIdWhite, id);
+            App.reloadAndPlay(App.soundIdWhite, id);
         }
         //endregion
         //region else (color)
         else if ((view.getId() != R.id.settingsColor) && ((view.getId() != R.id.settingsSound)))
         {
-            MainActivity.editorParameters.putString(TILE_COLOR, color);
-            MainActivity.editorParameters.putInt(SELECTED_COLOR, num);
-            MainActivity.editorParameters.apply();
+            App.editorParameters.putString(TILE_COLOR, color);
+            App.editorParameters.putInt(SELECTED_COLOR, num);
+            App.editorParameters.apply();
 
             for (int i=0; i<buttons_color.size(); i++){
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)buttons_color.get(i).getLayoutParams();
@@ -134,7 +134,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
             view.setBackgroundResource(R.drawable.xml_ui_button_green);
             Button b = (Button) view;
             b.setTextColor(Color.parseColor("#FFFFFF"));
-            MainActivity.editorSound.apply();
+            App.editorSound.apply();
         }
         else if ((view.getId() == R.id.settingsColor) || ((view.getId() == R.id.settingsSound))) {
             Button soundB = (Button)findViewById(R.id.settingsSound);
@@ -189,9 +189,9 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 
     public void setSelectedButtons()
     {
-        int selectedBlue = MainActivity.sound.getInt(SOUND_BLUE_SELECTED, 0);
-        int selectedWhite = MainActivity.sound.getInt(SOUND_WHITE_SELECTED, 0);
-        int selectedColor = MainActivity.parameters.getInt(SELECTED_COLOR, 0);
+        int selectedBlue = App.sound.getInt(SOUND_BLUE_SELECTED, 0);
+        int selectedWhite = App.sound.getInt(SOUND_WHITE_SELECTED, 0);
+        int selectedColor = App.parameters.getInt(SELECTED_COLOR, 0);
 
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)buttons_color.get(selectedColor).getLayoutParams();
         params.setMargins(10, 10, 10, 10);

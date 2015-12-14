@@ -263,12 +263,12 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
                         changeState(buttons.get(nb));
 
                         tiles++;
-                        MainActivity.playSound(MainActivity.soundIdBlue);
+                        App.playSound(App.soundIdBlue);
                     }
                     // If button is white
                     else {
                         v.setBackgroundColor(Color.parseColor("#FF0000"));
-                        MainActivity.playSound(MainActivity.soundIdWhite);
+                        App.playSound(App.soundIdWhite);
                         gameOver(-1);
                     }
                 }
@@ -373,12 +373,12 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
 
                 setChooseButtons(false);
                 for (int i=0; i<4; i++)
-                    if (MainActivity.highScores.contains(HIGH_SCORE_TIME + chooseButtons.get(i).getText()))
-                        MainActivity.editorHighScores.remove(HIGH_SCORE_TIME + chooseButtons.get(i).getText());
+                    if (App.highScores.contains(HIGH_SCORE_TIME + chooseButtons.get(i).getText()))
+                        App.editorHighScores.remove(HIGH_SCORE_TIME + chooseButtons.get(i).getText());
                 for (int i=4; i<8; i++)
-                    if (MainActivity.highScores.contains(HIGH_SCORE_TILES + chooseButtons.get(i).getText()))
-                        MainActivity.editorHighScores.remove(HIGH_SCORE_TILES + chooseButtons.get(i).getText());
-                MainActivity.editorHighScores.apply();
+                    if (App.highScores.contains(HIGH_SCORE_TILES + chooseButtons.get(i).getText()))
+                        App.editorHighScores.remove(HIGH_SCORE_TILES + chooseButtons.get(i).getText());
+                App.editorHighScores.apply();
 
                 Button showButton = (Button)findViewById(R.id.TimeShowHighScore);
                 showButton.setVisibility(View.VISIBLE);
@@ -405,19 +405,19 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
             scoreTextView.setText(String.format("%d.%02d%s", secs, centsec, getResources().getString(R.string.second_sign)));
 
             // Updating high score
-            if (MainActivity.highScores.contains(HIGH_SCORE_TILES + maxTiles))
+            if (App.highScores.contains(HIGH_SCORE_TILES + maxTiles))
             {
-                int currentHigh = MainActivity.highScores.getInt(HIGH_SCORE_TILES + maxTiles, 0);
+                int currentHigh = App.highScores.getInt(HIGH_SCORE_TILES + maxTiles, 0);
                 if (currentHigh > result) // If need update
                 {
-                    MainActivity.editorHighScores.putInt(HIGH_SCORE_TILES + maxTiles, result);
-                    MainActivity.editorHighScores.apply();
+                    App.editorHighScores.putInt(HIGH_SCORE_TILES + maxTiles, result);
+                    App.editorHighScores.apply();
                 }
             }
             else // If not exist
             {
-                MainActivity.editorHighScores.putInt(HIGH_SCORE_TILES + maxTiles, result);
-                MainActivity.editorHighScores.apply();
+                App.editorHighScores.putInt(HIGH_SCORE_TILES + maxTiles, result);
+                App.editorHighScores.apply();
             }
         }
         else // TIME mode
@@ -425,19 +425,19 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
             // Showing score
             scoreTextView.setText(String.valueOf(result));
 
-            if (MainActivity.highScores.contains(HIGH_SCORE_TIME + maxSeconds))
+            if (App.highScores.contains(HIGH_SCORE_TIME + maxSeconds))
             {
-                int currentHigh = MainActivity.highScores.getInt(HIGH_SCORE_TIME + maxSeconds, 0);
+                int currentHigh = App.highScores.getInt(HIGH_SCORE_TIME + maxSeconds, 0);
                 if (currentHigh < result) // If need update
                 {
-                    MainActivity.editorHighScores.putInt(HIGH_SCORE_TIME + maxSeconds, result);
-                    MainActivity.editorHighScores.apply();
+                    App.editorHighScores.putInt(HIGH_SCORE_TIME + maxSeconds, result);
+                    App.editorHighScores.apply();
                 }
             }
             else // If not exist
             {
-                MainActivity.editorHighScores.putInt(HIGH_SCORE_TIME + maxSeconds, result);
-                MainActivity.editorHighScores.apply();
+                App.editorHighScores.putInt(HIGH_SCORE_TIME + maxSeconds, result);
+                App.editorHighScores.apply();
             }
         }
 
@@ -483,14 +483,14 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
         {
             for (int i=0; i<4; i++) {
                 String newLabel = labels.get(i) + ": ";
-                if (!MainActivity.highScores.contains(HIGH_SCORE_TIME + labels.get(i))) newLabel = newLabel + getResources().getString(R.string.n_a);
-                else newLabel = newLabel + MainActivity.highScores.getInt(HIGH_SCORE_TIME + labels.get(i), 0);
+                if (!App.highScores.contains(HIGH_SCORE_TIME + labels.get(i))) newLabel = newLabel + getResources().getString(R.string.n_a);
+                else newLabel = newLabel + App.highScores.getInt(HIGH_SCORE_TIME + labels.get(i), 0);
                 labels.set(i, newLabel);
             }
             for (int i=4; i<8; i++) {
                 String newLabel = labels.get(i) + ": ";
-                if (!MainActivity.highScores.contains(HIGH_SCORE_TILES + labels.get(i))) newLabel = newLabel + getResources().getString(R.string.n_a);
-                else newLabel = newLabel + convertTimeFromMillis(MainActivity.highScores.getInt(HIGH_SCORE_TILES + labels.get(i), 0));
+                if (!App.highScores.contains(HIGH_SCORE_TILES + labels.get(i))) newLabel = newLabel + getResources().getString(R.string.n_a);
+                else newLabel = newLabel + convertTimeFromMillis(App.highScores.getInt(HIGH_SCORE_TILES + labels.get(i), 0));
                 labels.set(i, newLabel);
             }
         }
