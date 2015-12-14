@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Bundle;
@@ -48,10 +47,6 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
     LinearLayout scoreLayout;
     LinearLayout chooseLayout;
 
-    // Variables for audio
-    AudioManager audioManager;
-    MediaPlayer mediaPlayerBlue, mediaPlayerWhite;
-
     // Variables for animation
     final Animation fadeIn = new AlphaAnimation(0, 1);
     final Animation fadeOut = new AlphaAnimation(1, 0);
@@ -59,10 +54,6 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
     // Managing local high score
     public static final String HIGH_SCORE_TIME = "highScoreTime";
     public static final String HIGH_SCORE_TILES = "highScoreTiles";
-    public static final String SOUND_BLUE_TILES = "soundBlueTiles";
-    public static final String SOUND_WHITE_TILES = "soundWhiteTiles";
-    public static boolean SOUND_BLUE_NULL = false;
-    public static boolean SOUND_WHITE_NULL = false;
     final Context context = this;
 
     // Time
@@ -198,21 +189,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
 
     public void setAudio()
     {
-        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-
-        int idBlue = MainActivity.sound.getInt(SOUND_BLUE_TILES, 0);
-        int idWhite = MainActivity.sound.getInt(SOUND_WHITE_TILES, 0);
-        if (idBlue != 0) mediaPlayerBlue = MediaPlayer.create(getApplicationContext(), idBlue);
-        else SOUND_BLUE_NULL = true;
-        if (idWhite != 0) mediaPlayerWhite = MediaPlayer.create(getApplicationContext(), idWhite);
-        else SOUND_WHITE_NULL = true;
-
-        int audioFocusResult = audioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC,
-                AudioManager.AUDIOFOCUS_GAIN);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        if (audioFocusResult != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-            // could not get audio focus.
-        }
     }
 
     public void setChooseButtonsOnClickListeners()
@@ -286,12 +263,12 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
                         changeState(buttons.get(nb));
 
                         tiles++;
-                        if (!SOUND_BLUE_NULL) mediaPlayerBlue.start();
+                        MainActivity.playSound(MainActivity.soundIdBlue);
                     }
                     // If button is white
                     else {
                         v.setBackgroundColor(Color.parseColor("#FF0000"));
-                        if (!SOUND_WHITE_NULL) mediaPlayerWhite.start();
+                        MainActivity.playSound(MainActivity.soundIdWhite);
                         gameOver(-1);
                     }
                 }
@@ -426,7 +403,6 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
             int secs = (int) Math.floor(result / 1000);
             int centsec = (result/10 - secs*100);
             scoreTextView.setText(String.format("%d.%02d%s", secs, centsec, getResources().getString(R.string.second_sign)));
-            // FIXME: 15/12/2015 up
 
             // Updating high score
             if (MainActivity.highScores.contains(HIGH_SCORE_TILES + maxTiles))
