@@ -23,367 +23,118 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="6dp"
-                android:textColor="#FFFFFF"
-                android:text="0"
+                android:textColor="@color/white"
+                android:text="@string/zero"
                 android:layout_centerInParent="true"/>
             </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/RowOne"
+        <android.support.v7.widget.GridLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="4"
+            app:layout_gravity="fill"
+            android:background="@android:color/transparent"
+            app:columnCount="4"
+            app:rowCount="4">
 
-            android:layout_marginBottom="1dp">
+            <Button
+                android:id="@+id/RowOneBtn1"
+                app:layout_rowWeight="1"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"
+                app:layout_column="0" />
+            <Button
+                android:id="@+id/RowOneBtn2"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"
+                app:layout_column="1" />
+            <Button
+                android:id="@+id/RowOneBtn3"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"
+                app:layout_column="2" />
+            <Button
+                android:id="@+id/RowOneBtn4"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"
+                app:layout_column="3" />
 
-            <View
-                android:id="@+id/EmptyOne"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true" />
+            <Button
+                android:id="@+id/RowTwoBtn1"
+                app:layout_rowWeight="1"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"/>
+            <Button
+                android:id="@+id/RowTwoBtn2"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"/>
+            <Button
+                android:id="@+id/RowTwoBtn3"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"/>
+            <Button
+                android:id="@+id/RowTwoBtn4"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"/>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toLeftOf="@+id/EmptyOne"
-                android:layout_toStartOf="@+id/EmptyOne"
-                android:layout_marginRight="1dp"
-                android:layout_marginEnd="1dp">
+            <Button
+                android:id="@+id/RowThreeBtn1"
+                app:layout_rowWeight="1"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"/>
+            <Button
+                android:id="@+id/RowThreeBtn2"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"/>
+            <Button
+                android:id="@+id/RowThreeBtn3"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"/>
+            <Button
+                android:id="@+id/RowThreeBtn4"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"/>
 
-                <View
-                    android:id="@+id/EmptyOne1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"/>
+            <Button
+                android:id="@+id/RowFourBtn1"
+                app:layout_rowWeight="1"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"/>
+            <Button
+                android:id="@+id/RowFourBtn2"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"/>
+            <Button
+                android:id="@+id/RowFourBtn3"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"/>
+            <Button
+                android:id="@+id/RowFourBtn4"
+                app:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_classic"
+                android:background="@color/white"/>
+        </android.support.v7.widget.GridLayout>
 
-                <Button
-                    android:id="@+id/RowOneBtn1"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toLeftOf="@id/EmptyOne1"
-                    android:layout_toStartOf="@+id/EmptyOne1"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginEnd="1dp"/>
-                <Button
-                    android:id="@+id/RowOneBtn2"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toRightOf="@id/EmptyOne1"
-                    android:layout_toEndOf="@+id/EmptyOne1"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginStart="1dp"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/EmptyOne"
-                android:layout_toEndOf="@+id/EmptyOne"
-                android:layout_marginLeft="1dp"
-                android:layout_marginStart="1dp">
-
-                <View
-                    android:id="@+id/EmptyOne2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"/>
-
-                <Button
-                    android:id="@+id/RowOneBtn3"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toLeftOf="@id/EmptyOne2"
-                    android:layout_toStartOf="@+id/EmptyOne2"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginEnd="1dp"/>
-                <Button
-                    android:id="@+id/RowOneBtn4"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toRightOf="@id/EmptyOne2"
-                    android:layout_toEndOf="@+id/EmptyOne2"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginStart="1dp"/>
-
-            </RelativeLayout>
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/RowTwo"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp">
-
-            <View
-                android:id="@+id/EmptyTwo"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toLeftOf="@+id/EmptyTwo"
-                android:layout_toStartOf="@+id/EmptyTwo"
-                android:layout_marginRight="1dp"
-                android:layout_marginEnd="1dp">
-
-                <View
-                    android:id="@+id/EmptyTwo1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"/>
-
-                <Button
-                    android:id="@+id/RowTwoBtn1"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toLeftOf="@id/EmptyTwo1"
-                    android:layout_toStartOf="@+id/EmptyTwo1"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginEnd="1dp"/>
-                <Button
-                    android:id="@+id/RowTwoBtn2"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toRightOf="@id/EmptyTwo1"
-                    android:layout_toEndOf="@+id/EmptyTwo1"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginStart="1dp"/>
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/EmptyTwo"
-                android:layout_toEndOf="@+id/EmptyTwo"
-                android:layout_marginLeft="1dp"
-                android:layout_marginStart="1dp">
-
-                <View
-                    android:id="@+id/EmptyTwo2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"/>
-
-                <Button
-                    android:id="@+id/RowTwoBtn3"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toLeftOf="@id/EmptyTwo2"
-                    android:layout_toStartOf="@+id/EmptyTwo2"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginEnd="1dp"/>
-                <Button
-                    android:id="@+id/RowTwoBtn4"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toRightOf="@id/EmptyTwo2"
-                    android:layout_toEndOf="@+id/EmptyTwo2"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginStart="1dp"/>
-
-            </RelativeLayout>
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/RowThree"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp">
-
-            <View
-                android:id="@+id/EmptyThree"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toLeftOf="@+id/EmptyThree"
-                android:layout_toStartOf="@+id/EmptyThree"
-                android:layout_marginRight="1dp"
-                android:layout_marginEnd="1dp">
-
-                <View
-                    android:id="@+id/EmptyThree1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"/>
-
-                <Button
-                    android:id="@+id/RowThreeBtn1"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toLeftOf="@id/EmptyThree1"
-                    android:layout_toStartOf="@+id/EmptyThree1"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginEnd="1dp"/>
-                <Button
-                    android:id="@+id/RowThreeBtn2"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toRightOf="@id/EmptyThree1"
-                    android:layout_toEndOf="@+id/EmptyThree1"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginStart="1dp"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/EmptyThree"
-                android:layout_toEndOf="@+id/EmptyThree"
-                android:layout_marginLeft="1dp"
-                android:layout_marginStart="1dp">
-
-                <View
-                    android:id="@+id/EmptyThree2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"/>
-
-                <Button
-                    android:id="@+id/RowThreeBtn3"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toLeftOf="@id/EmptyThree2"
-                    android:layout_toStartOf="@+id/EmptyThree2"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginEnd="1dp"/>
-                <Button
-                    android:id="@+id/RowThreeBtn4"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toRightOf="@id/EmptyThree2"
-                    android:layout_toEndOf="@+id/EmptyThree2"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginStart="1dp"/>
-
-            </RelativeLayout>
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/RowFour"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-
-            android:layout_marginTop="1dp">
-
-            <View
-                android:id="@+id/EmptyFour"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toLeftOf="@+id/EmptyFour"
-                android:layout_toStartOf="@+id/EmptyFour"
-                android:layout_marginRight="1dp"
-                android:layout_marginEnd="1dp">
-
-                <View
-                    android:id="@+id/EmptyFour1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"/>
-
-                <Button
-                    android:id="@+id/RowFourBtn1"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toLeftOf="@id/EmptyFour1"
-                    android:layout_toStartOf="@+id/EmptyFour1"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginEnd="1dp"/>
-                <Button
-                    android:id="@+id/RowFourBtn2"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toRightOf="@id/EmptyFour1"
-                    android:layout_toEndOf="@+id/EmptyFour1"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginStart="1dp"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/EmptyFour"
-                android:layout_toEndOf="@+id/EmptyFour"
-                android:layout_marginLeft="1dp"
-                android:layout_marginStart="1dp">
-
-                <View
-                    android:id="@+id/EmptyFour2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"/>
-
-                <Button
-                    android:id="@+id/RowFourBtn3"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toLeftOf="@id/EmptyFour2"
-                    android:layout_toStartOf="@+id/EmptyFour2"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginEnd="1dp"/>
-                <Button
-                    android:id="@+id/RowFourBtn4"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_toRightOf="@id/EmptyFour2"
-                    android:layout_toEndOf="@+id/EmptyFour2"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginStart="1dp"/>
-
-            </RelativeLayout>
-
-        </RelativeLayout>
     </LinearLayout>
 
     <!-- Score screen -->
@@ -392,7 +143,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="70dp"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:orientation="vertical"
         android:clickable="false">
         
@@ -400,7 +151,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.6"
-            android:background="#FFFFFF">
+            android:background="@color/white">
 
             <TextView
                 android:id="@+id/bestScoreTV"
@@ -431,7 +182,7 @@
                 android:layout_height="100dp"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/xml_ui_button_black"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:text="@string/restart"
                 android:onClick="restartClicked"/>
@@ -465,7 +216,7 @@
                 android:layout_height="100dp"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/xml_ui_button_black"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:text="@string/leaderboard"
                 android:onClick="leaderboardClicked"/>
