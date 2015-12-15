@@ -145,6 +145,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
 
         chooseLayout.setVisibility(View.VISIBLE);
         showHighScoreLayout.setVisibility(View.VISIBLE);
+        scoreLayout.setVisibility(View.GONE);
 
         // Setting tiles and time values
         tiles = 0;

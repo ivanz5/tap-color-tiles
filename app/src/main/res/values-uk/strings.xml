@@ -59,4 +59,5 @@
     <string name="colors">Кольори</string>
     <string name="color_tiles">Кольорові плитки</string>
     <string name="select_tiles_color">Виберіть колір плиток</string>
+    <string name="time_mode_time_placeholder">12.95с</string>
 </resources>
