@@ -10,6 +10,7 @@ import android.media.AudioManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,9 +18,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.GridLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -110,7 +109,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
         setGameButtonsOnClickListeners(); // Setting onclick listeners for tile buttons
 
         int fb = random.nextInt(4);
-        buttons.get(fb).setBackgroundResource(R.drawable.xml_big_button_black);
+        buttons.get(fb).setBackgroundColor(ContextCompat.getColor(this, R.color.black));
         idColor.put(buttons.get(fb).getId(), "black");
     }
 
@@ -143,6 +142,9 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
         shareButton = (Button)findViewById(R.id.shareButtonTime);
         highScoresButton = (Button)findViewById(R.id.highScoresButtonTime);
         random = new Random();
+
+        chooseLayout.setVisibility(View.VISIBLE);
+        showHighScoreLayout.setVisibility(View.VISIBLE);
 
         // Setting tiles and time values
         tiles = 0;
@@ -288,12 +290,12 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
     {
         if (idColor.get(view.getId()).equals("black"))
         {
-            view.setBackgroundResource(R.drawable.xml_big_button_white);
+            view.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
             idColor.put(view.getId(), "white");
         }
         else
         {
-            view.setBackgroundResource(R.drawable.xml_big_button_black);
+            view.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
             idColor.put(view.getId(), "black");
         }
     }
@@ -309,11 +311,11 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
         showHighScoreLayout.setVisibility(View.VISIBLE);
         scoreLayout.setVisibility(View.INVISIBLE);
         for (int i=0; i<4; i++) {
-            buttons.get(i).setBackgroundResource(R.drawable.xml_big_button_white);
+            buttons.get(i).setBackgroundColor(ContextCompat.getColor(this, R.color.white));
             idColor.put(buttons.get(i).getId(), "white");
         }
         int rb = random.nextInt(4);
-        buttons.get(rb).setBackgroundResource(R.drawable.xml_big_button_black);
+        buttons.get(rb).setBackgroundColor(ContextCompat.getColor(this, R.color.black));
         idColor.put(buttons.get(rb).getId(), "black");
         gameStarted = false;
         time = 0;

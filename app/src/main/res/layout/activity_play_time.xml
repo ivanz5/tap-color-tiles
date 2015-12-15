@@ -52,65 +52,48 @@
                 android:text="0"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/RowOneTime"
+        <android.support.v7.widget.GridLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="#FF8833" >
-
-            <View
-                android:id="@+id/TimeEmptyTop"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true" />
+            android:layout_weight="2"
+            ads:rowCount="2"
+            ads:columnCount="2">
 
             <Button
                 android:id="@+id/TwoByTwoTopLeft"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:layout_toLeftOf="@id/TimeEmptyTop"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/xml_big_button_white"/>
-
+                ads:layout_rowWeight="1"
+                ads:layout_columnWeight="1"
+                ads:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_big"
+                android:layout_marginLeft="0dp"
+                android:layout_marginStart="0dp"
+                android:background="@color/white"/>
             <Button
                 android:id="@+id/TwoByTwoTopRight"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:layout_toRightOf="@id/TimeEmptyTop"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/xml_big_button_white"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/RowTwoTime"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="#FF8833" >
-
-            <View
-                android:id="@+id/TimeEmptyBottom"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true" />
+                ads:layout_columnWeight="1"
+                ads:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_big"
+                android:layout_marginRight="0dp"
+                android:layout_marginEnd="0dp"
+                android:background="@color/white"/>
 
             <Button
                 android:id="@+id/TwoByTwoBottomLeft"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:layout_toLeftOf="@id/TimeEmptyBottom"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/xml_big_button_white"/>
-
+                ads:layout_rowWeight="1"
+                ads:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_big"
+                android:layout_marginLeft="0dp"
+                android:layout_marginStart="0dp"
+                android:background="@color/white"/>
             <Button
                 android:id="@+id/TwoByTwoBottomRight"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:layout_toRightOf="@id/TimeEmptyBottom"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/xml_big_button_white"/>
+                ads:layout_gravity="fill"
+                android:layout_margin="@dimen/grid_cell_margin_big"
+                android:layout_marginRight="0dp"
+                android:layout_marginEnd="0dp"
+                android:background="@color/white"/>
 
-        </RelativeLayout>
+        </android.support.v7.widget.GridLayout>
     </LinearLayout>
 
     <!-- Score screen -->
@@ -119,10 +102,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="70dp"
-        android:visibility="invisible"
         android:orientation="vertical"
         android:clickable="false"
-        android:background="#324529">
+        android:background="#324529"
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -199,7 +182,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/showHighScoreLayout"
         ads:rowCount="6"
-        ads:columnCount="2">
+        ads:columnCount="2"
+        android:visibility="gone">
 
         <Button
             android:layout_width="100dp"
@@ -293,7 +277,8 @@
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="70dp"
-        android:background="#564444" >
+        android:background="#564444"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
