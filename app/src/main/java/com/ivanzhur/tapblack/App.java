@@ -32,6 +32,7 @@ public class App extends Application {
     static SoundPool soundPool;
     static int soundIdBlue, soundIdWhite;
     static boolean playWhenLoaded;
+    private static boolean soundIdsReset = false;
     static Context context;
 
     @Override
@@ -94,11 +95,33 @@ public class App extends Application {
         });
 
         playWhenLoaded = false;
-        // FIXME: 15/12/2015 in new version of app soundRawId will be different and it will cause NullPointerException. Add checking or something.
-        if (soundRawIdBlue != 0) soundIdBlue = soundPool.load(this, soundRawIdBlue, 1);
-        else soundIdBlue = -1;
-        if (soundRawIdWhite != 0) soundIdWhite = soundPool.load(this, soundRawIdWhite, 1);
-        else soundIdWhite = -1;
+
+        // FIXME: need to test
+        // New version of app was installed. Possible changes in sound raw ids
+        // Call to soundPool.load() can cause NullPointerException
+        try {
+            if (soundRawIdBlue != 0) soundIdBlue = soundPool.load(this, soundRawIdBlue, 1);
+            else soundIdBlue = -1;
+            if (soundRawIdWhite != 0) soundIdWhite = soundPool.load(this, soundRawIdWhite, 1);
+            else soundIdWhite = -1;
+        }
+        catch (Exception ex){ // Try to reset sound raw ids to defaults
+            if (!soundIdsReset) resetSoundIds();
+            else { // Exception thrown again. Resetting didn't help. Just set sounds to none
+                soundIdBlue = -1;
+                soundIdWhite = -1;
+            }
+        }
+    }
+
+    private void resetSoundIds(){
+        int soundRawIdBlue = R.raw.click_blue_1;
+        int soundRawIdWhite = R.raw.click_white_1;
+        editorSound.putInt(SOUND_BLUE_TILES, soundRawIdBlue);
+        editorSound.putInt(SOUND_WHITE_TILES, soundRawIdWhite);
+        editorSound.apply();
+        soundIdsReset = true;
+        setSound();
     }
 
     public static void reloadAndPlay(int id, int resId){
