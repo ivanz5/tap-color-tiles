@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/button_ui_gray" android:state_pressed="true" />
-    <item android:drawable="@drawable/button_ui_black" />
+    <item android:drawable="@color/ui_gray" android:state_pressed="true" />
+    <item android:drawable="@color/ui_blue" />
 </selector>

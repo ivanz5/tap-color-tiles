@@ -94,9 +94,10 @@ public class App extends Application {
         });
 
         playWhenLoaded = false;
-        if (soundRawIdBlue != 0) soundIdBlue = soundPool.load(context, soundRawIdBlue, 1);
+        // FIXME: 15/12/2015 in new version of app soundRawId will be different and it will cause NullPointerException. Add checking or something.
+        if (soundRawIdBlue != 0) soundIdBlue = soundPool.load(this, soundRawIdBlue, 1);
         else soundIdBlue = -1;
-        if (soundRawIdWhite != 0) soundIdWhite = soundPool.load(context, soundRawIdWhite, 1);
+        if (soundRawIdWhite != 0) soundIdWhite = soundPool.load(this, soundRawIdWhite, 1);
         else soundIdWhite = -1;
     }
 

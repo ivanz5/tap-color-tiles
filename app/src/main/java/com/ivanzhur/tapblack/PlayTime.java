@@ -16,7 +16,10 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -45,7 +48,8 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
     TextView tilesTextView;
     TextView scoreTextView;
     LinearLayout scoreLayout;
-    LinearLayout chooseLayout;
+    android.support.v7.widget.GridLayout chooseLayout;
+    FrameLayout showHighScoreLayout;
 
     // Variables for animation
     final Animation fadeIn = new AlphaAnimation(0, 1);
@@ -133,7 +137,8 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
         tilesTextView = (TextView)findViewById(R.id.timeModeTilesTV);
         scoreTextView = (TextView)findViewById(R.id.timeModeScoreTV);
         scoreLayout = (LinearLayout)findViewById(R.id.scoreScreenTime);
-        chooseLayout = (LinearLayout)findViewById(R.id.chooseScreenTime);
+        chooseLayout = (android.support.v7.widget.GridLayout)findViewById(R.id.chooseModeLayout);
+        showHighScoreLayout = (FrameLayout)findViewById(R.id.showHighScoreLayout);
         restartButton = (Button)findViewById(R.id.restartButtonTime);
         shareButton = (Button)findViewById(R.id.shareButtonTime);
         highScoresButton = (Button)findViewById(R.id.highScoresButtonTime);
@@ -178,6 +183,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
             @Override
             public void onAnimationEnd(Animation animation) {
                 chooseLayout.setVisibility(View.INVISIBLE);
+                showHighScoreLayout.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -221,7 +227,9 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
                     }
 
                     chooseLayout.startAnimation(fadeOut);
+                    showHighScoreLayout.startAnimation(fadeOut);
                     chooseLayout.setClickable(false);
+                    showHighScoreLayout.setClickable(false);
                 }
             });
         }
@@ -298,6 +306,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
         scoreLayout.clearAnimation();
         scoreLayout.setClickable(false);
         chooseLayout.setVisibility(View.VISIBLE);
+        showHighScoreLayout.setVisibility(View.VISIBLE);
         scoreLayout.setVisibility(View.INVISIBLE);
         for (int i=0; i<4; i++) {
             buttons.get(i).setBackgroundResource(R.drawable.xml_big_button_white);
