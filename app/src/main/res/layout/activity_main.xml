@@ -15,8 +15,8 @@
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <RelativeLayout
             android:id="@+id/RowTwo"
@@ -36,6 +36,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:layout_toLeftOf="@id/MainEmptyOne"
+                android:layout_toStartOf="@id/MainEmptyOne"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/xml_ui_button_white"
                 android:textColor="#000000"
@@ -47,6 +48,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:layout_toRightOf="@id/MainEmptyOne"
+                android:layout_toEndOf="@id/MainEmptyOne"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/xml_ui_button_black"
                 android:textColor="#FFFFFF"
@@ -70,13 +72,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@id/MainEmptyTwo"
+                android:layout_toStartOf="@+id/MainEmptyTwo"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/settingsButton"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:layout_alignParentBottom="true"
                     android:layout_weight="1"
                     android:background="@drawable/xml_ui_button_black"
                     android:textColor="#FFFFFF"
@@ -87,7 +89,6 @@
                     android:id="@+id/rulesButton"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:layout_alignParentBottom="true"
                     android:layout_weight="1"
                     android:background="@drawable/xml_ui_button_white"
                     android:textColor="#000000"
@@ -100,13 +101,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@id/MainEmptyTwo"
+                android:layout_toEndOf="@id/MainEmptyTwo"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/leaderboardButton"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:layout_alignParentBottom="true"
                     android:layout_weight="1"
                     android:background="@drawable/xml_ui_button_white"
                     android:textColor="#000000"
@@ -117,7 +118,6 @@
                     android:id="@+id/achievementsButton"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:layout_alignParentBottom="true"
                     android:layout_weight="1"
                     android:background="@drawable/xml_ui_button_black"
                     android:textColor="#FFFFFF"

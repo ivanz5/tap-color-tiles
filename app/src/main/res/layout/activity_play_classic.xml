@@ -46,6 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@+id/EmptyOne"
+                android:layout_toStartOf="@+id/EmptyOne"
                 android:layout_marginRight="1dp"
                 android:layout_marginEnd="1dp">
 
@@ -60,6 +61,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toLeftOf="@id/EmptyOne1"
+                    android:layout_toStartOf="@+id/EmptyOne1"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginRight="1dp"
@@ -69,6 +71,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toRightOf="@id/EmptyOne1"
+                    android:layout_toEndOf="@+id/EmptyOne1"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginLeft="1dp"
@@ -80,6 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/EmptyOne"
+                android:layout_toEndOf="@+id/EmptyOne"
                 android:layout_marginLeft="1dp"
                 android:layout_marginStart="1dp">
 
@@ -94,6 +98,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toLeftOf="@id/EmptyOne2"
+                    android:layout_toStartOf="@+id/EmptyOne2"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginRight="1dp"
@@ -103,6 +108,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toRightOf="@id/EmptyOne2"
+                    android:layout_toEndOf="@+id/EmptyOne2"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginLeft="1dp"
@@ -129,6 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@+id/EmptyTwo"
+                android:layout_toStartOf="@+id/EmptyTwo"
                 android:layout_marginRight="1dp"
                 android:layout_marginEnd="1dp">
 
@@ -143,6 +150,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toLeftOf="@id/EmptyTwo1"
+                    android:layout_toStartOf="@+id/EmptyTwo1"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginRight="1dp"
@@ -152,6 +160,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toRightOf="@id/EmptyTwo1"
+                    android:layout_toEndOf="@+id/EmptyTwo1"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginLeft="1dp"
@@ -164,6 +173,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/EmptyTwo"
+                android:layout_toEndOf="@+id/EmptyTwo"
                 android:layout_marginLeft="1dp"
                 android:layout_marginStart="1dp">
 
@@ -178,6 +188,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toLeftOf="@id/EmptyTwo2"
+                    android:layout_toStartOf="@+id/EmptyTwo2"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginRight="1dp"
@@ -187,6 +198,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toRightOf="@id/EmptyTwo2"
+                    android:layout_toEndOf="@+id/EmptyTwo2"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginLeft="1dp"
@@ -213,6 +225,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@+id/EmptyThree"
+                android:layout_toStartOf="@+id/EmptyThree"
                 android:layout_marginRight="1dp"
                 android:layout_marginEnd="1dp">
 
@@ -227,6 +240,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toLeftOf="@id/EmptyThree1"
+                    android:layout_toStartOf="@+id/EmptyThree1"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginRight="1dp"
@@ -236,6 +250,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toRightOf="@id/EmptyThree1"
+                    android:layout_toEndOf="@+id/EmptyThree1"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginLeft="1dp"
@@ -247,6 +262,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/EmptyThree"
+                android:layout_toEndOf="@+id/EmptyThree"
                 android:layout_marginLeft="1dp"
                 android:layout_marginStart="1dp">
 
@@ -261,6 +277,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toLeftOf="@id/EmptyThree2"
+                    android:layout_toStartOf="@+id/EmptyThree2"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginRight="1dp"
@@ -270,6 +287,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toRightOf="@id/EmptyThree2"
+                    android:layout_toEndOf="@+id/EmptyThree2"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginLeft="1dp"
@@ -295,6 +313,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@+id/EmptyFour"
+                android:layout_toStartOf="@+id/EmptyFour"
                 android:layout_marginRight="1dp"
                 android:layout_marginEnd="1dp">
 
@@ -309,6 +328,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toLeftOf="@id/EmptyFour1"
+                    android:layout_toStartOf="@+id/EmptyFour1"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginRight="1dp"
@@ -318,6 +338,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toRightOf="@id/EmptyFour1"
+                    android:layout_toEndOf="@+id/EmptyFour1"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginLeft="1dp"
@@ -329,6 +350,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/EmptyFour"
+                android:layout_toEndOf="@+id/EmptyFour"
                 android:layout_marginLeft="1dp"
                 android:layout_marginStart="1dp">
 
@@ -343,6 +365,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toLeftOf="@id/EmptyFour2"
+                    android:layout_toStartOf="@+id/EmptyFour2"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginRight="1dp"
@@ -352,6 +375,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:layout_toRightOf="@id/EmptyFour2"
+                    android:layout_toEndOf="@+id/EmptyFour2"
                     android:layout_alignParentBottom="true"
                     android:background="#FFFFFF"
                     android:layout_marginLeft="1dp"
@@ -382,7 +406,6 @@
                 android:id="@+id/bestScoreTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Best score: 15"
                 android:textColor="#000000"
                 android:textSize="21sp"
                 android:layout_centerHorizontal="true"
@@ -392,8 +415,7 @@
                 android:id="@+id/scoreTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#000000"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
@@ -410,7 +432,7 @@
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/xml_ui_button_black"
                 android:textColor="#FFFFFF"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="@string/restart"
                 android:onClick="restartClicked"/>
         </RelativeLayout>
@@ -427,7 +449,7 @@
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/xml_ui_button_white"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="@string/share"
                 android:onClick="shareClicked"/>
         </RelativeLayout>
@@ -444,7 +466,7 @@
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/xml_ui_button_black"
                 android:textColor="#FFFFFF"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="@string/leaderboard"
                 android:onClick="leaderboardClicked"/>
         </RelativeLayout>
