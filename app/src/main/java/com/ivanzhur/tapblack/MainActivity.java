@@ -1,20 +1,36 @@
 package com.ivanzhur.tapblack;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
-import com.google.example.games.basegameutils.BaseGameActivity;
+import com.google.example.games.basegameutils.BaseGameUtils;
 
 
-public class MainActivity extends BaseGameActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements
+        View.OnClickListener,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
+
+    static int RC_SIGN_IN = 9001;
+    static int RC_SIGN_IN_LB = 9002;
+    static int RC_SIGN_IN_ACH = 9003;
+    static GoogleApiClient mGoogleApiClient;
+    static int connectionMode;
+    private boolean mResolvingConnectionFailure = false;
+    static boolean mSignInClicked = false;
+
+    String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +50,13 @@ public class MainActivity extends BaseGameActivity implements View.OnClickListen
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         mAdView.loadAd(adRequest);
 
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
+                .build();
+        connectionMode = RC_SIGN_IN; // Just sign in
+
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
         findViewById(R.id.playClassicButton).setOnClickListener(this);
@@ -47,14 +70,30 @@ public class MainActivity extends BaseGameActivity implements View.OnClickListen
     }
 
     @Override
+    protected void onStart(){
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+    
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        mGoogleApiClient.disconnect();
+    }
+
+    @Override
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()){
             case R.id.sign_in_button: {
-                beginUserInitiatedSignIn();
+                mSignInClicked = true;
+                mGoogleApiClient.connect();
             } break;
             case R.id.sign_out_button: {
-                signOut();
+                mSignInClicked = false;
+                Games.signOut(mGoogleApiClient);
+                mGoogleApiClient.disconnect();
+
                 findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
                 findViewById(R.id.sign_out_button).setVisibility(View.GONE);
             } break;
@@ -73,31 +112,86 @@ public class MainActivity extends BaseGameActivity implements View.OnClickListen
                 break;
 
             case R.id.leaderboardButton: {
-                if (getApiClient().isConnected())
-                    startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(),
+                if (mGoogleApiClient.isConnected())
+                    startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
                             App.LEADERBOARD_ID_CLASSIC), App.REQUEST_LEADERBOARD);
-                else if (!getApiClient().isConnecting())
-                    getApiClient().connect();
+                else if (!mGoogleApiClient.isConnecting()) {
+                    connectionMode = RC_SIGN_IN_LB; // Show leaderboard when connected
+                    mSignInClicked = true;
+                    mGoogleApiClient.connect();
+                }
             } break;
             case R.id.achievementsButton: {
-                if (getApiClient().isConnected())
-                    startActivityForResult(Games.Achievements.getAchievementsIntent(getApiClient()), App.REQUEST_ACHIEVEMENTS);
-                else if (!getApiClient().isConnecting())
-                    getApiClient().connect();
+                if (mGoogleApiClient.isConnected())
+                    startActivityForResult(Games.Achievements.getAchievementsIntent(mGoogleApiClient), App.REQUEST_ACHIEVEMENTS);
+                else if (!mGoogleApiClient.isConnecting()) {
+                    connectionMode = RC_SIGN_IN_ACH; // Show achievements when connected
+                    mSignInClicked = true;
+                    mGoogleApiClient.connect();
+                }
             } break;
         }
 
         if (intent != null) startActivity(intent);
     }
 
-    public void onSignInSucceeded() {
+    // region Play Game services connection
+    @Override
+    public void onConnected(Bundle bundle) {
+        Log.i(TAG, "onConnected: connected");
         findViewById(R.id.sign_in_button).setVisibility(View.GONE);
         findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
+
+        if (connectionMode == RC_SIGN_IN_LB){ // Show leaderboard
+            startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
+                    App.LEADERBOARD_ID_CLASSIC), App.REQUEST_LEADERBOARD);
+        }
+        else if (connectionMode == RC_SIGN_IN_ACH){ // Show achievements
+            startActivityForResult(Games.Achievements.getAchievementsIntent(mGoogleApiClient), App.REQUEST_ACHIEVEMENTS);
+        }
+
+        connectionMode = RC_SIGN_IN;
     }
 
     @Override
-    public void onSignInFailed() {
-        findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-        findViewById(R.id.sign_out_button).setVisibility(View.GONE);
+    public void onConnectionSuspended(int i) {
+        Log.i(TAG, "onConnectionSuspended: ");
     }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.i(TAG, "onConnectionFailed: " + connectionResult.toString());
+
+        if (mResolvingConnectionFailure) return;
+
+        if (mSignInClicked) {
+            mSignInClicked = false;
+            mResolvingConnectionFailure = true;
+
+            // Attempt to resolve the connection failure using BaseGameUtils.
+            if (!BaseGameUtils.resolveConnectionFailure(this,
+                    mGoogleApiClient, connectionResult,
+                    connectionMode, getString(R.string.signin_other_error))) {
+                mResolvingConnectionFailure = false;
+                connectionMode = RC_SIGN_IN;
+            }
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        Log.i(TAG, "onActivityResult: " + requestCode + " " + resultCode + " " + intent);
+
+        if (requestCode == RC_SIGN_IN || requestCode == RC_SIGN_IN_LB || requestCode == RC_SIGN_IN_ACH) {
+            mSignInClicked = false;
+            mResolvingConnectionFailure = false;
+            if (resultCode == RESULT_OK) {
+                mGoogleApiClient.connect();
+            } else {
+                // Bring up an error dialog to alert the user that sign-in failed
+                BaseGameUtils.showActivityResultError(this,
+                        requestCode, resultCode, R.string.fail);
+            }
+        }
+    }
+    //endregion
 }

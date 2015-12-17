@@ -1,5 +1,6 @@
 package com.ivanzhur.tapblack;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -30,10 +31,9 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import com.google.android.gms.games.Games;
-import com.google.example.games.basegameutils.BaseGameActivity;
 
 
-public class PlayClassic extends BaseGameActivity {
+public class PlayClassic extends Activity {
 
     //region Declaring vars
     Random random;
@@ -108,19 +108,19 @@ public class PlayClassic extends BaseGameActivity {
         addTile(); // Adding first blue tile
     }
 
-    // On sign in succeeded
-    public void onSignInSucceeded()
-    {
+    @Override
+    protected void onStart(){
+        super.onStart();
+        //MainActivity.mGoogleApiClient.connect();
     }
 
-    // On sign in failed
-    public void onSignInFailed()
-    {
-        //Toast.makeText(getApplicationContext(), "Sign in failed", Toast.LENGTH_SHORT).show();
+    @Override
+    protected void onStop(){
+        super.onStop();
+        //MainActivity.mGoogleApiClient.disconnect();
     }
 
-    public void setAds()
-    {
+    public void setAds() {
         AdView mAdView = (AdView) findViewById(R.id.adViewClassic);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice("95FD4A0A356D8AEFEABC5D6262F89B0B")
@@ -130,8 +130,7 @@ public class PlayClassic extends BaseGameActivity {
         mAdView.loadAd(adRequest);
     }
 
-    public void setVariables()
-    {
+    public void setVariables() {
         idColor = new HashMap<>();
         random = new Random();
         timerTextView = (TextView)findViewById(R.id.timeTV);
@@ -144,8 +143,7 @@ public class PlayClassic extends BaseGameActivity {
         App.LEADERBOARD_ID_CLASSIC = getResources().getString(R.string.leaderboard_classic_mode);
     }
 
-    public void setAnimation()
-    {
+    public void setAnimation() {
         fadeIn.setDuration(500);
         fadeIn.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -180,8 +178,7 @@ public class PlayClassic extends BaseGameActivity {
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
     }
 
-    public void setButtonsOnClickListeners()
-    {
+    public void setButtonsOnClickListeners() {
         for (int i=0; i<16; i++)
         {
             idColor.put(buttons.get(i).getId(), "white");
@@ -235,8 +232,7 @@ public class PlayClassic extends BaseGameActivity {
         }
     }
 
-    public void setBestScoreResetting()
-    {
+    public void setBestScoreResetting() {
         bestScoreTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -260,8 +256,7 @@ public class PlayClassic extends BaseGameActivity {
         });
     }
 
-    public void addTile()
-    {
+    public void addTile() {
         numBlack++;
         int nb = random.nextInt(16);
         while (idColor.get(buttons.get(nb).getId()).equals("black"))
@@ -270,8 +265,7 @@ public class PlayClassic extends BaseGameActivity {
     }
 
     // Change state (color) of tile
-    public void changeState(View view)
-    {
+    public void changeState(View view) {
         if (idColor.get(view.getId()).equals("black"))
         {
             view.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -285,8 +279,7 @@ public class PlayClassic extends BaseGameActivity {
     }
 
     // Restart button
-    public void restartClicked(View view)
-    {
+    public void restartClicked(View view) {
         timerTextView.setText("0");
         scoreLayout.clearAnimation();
         scoreLayout.setClickable(false);
@@ -305,8 +298,7 @@ public class PlayClassic extends BaseGameActivity {
     }
 
     // Share button
-    public void shareClicked(View view)
-    {
+    public void shareClicked(View view) {
         CharSequence text = getResources().getString(R.string.i_stayed) + scoreTextView.getText() + getResources().getString(R.string.in_tap_black);
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
@@ -316,18 +308,18 @@ public class PlayClassic extends BaseGameActivity {
     }
 
     // Leaderboard button
-    public void leaderboardClicked(View view)
-    {
-        if (getApiClient().isConnected())
-        startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(),
+    public void leaderboardClicked(View view) {
+        if (MainActivity.mGoogleApiClient.isConnected())
+        startActivityForResult(Games.Leaderboards.getLeaderboardIntent(MainActivity.mGoogleApiClient,
                 App.LEADERBOARD_ID_CLASSIC), App.REQUEST_LEADERBOARD);
-        else if (!getApiClient().isConnecting())
-            getApiClient().connect();
+        else if (!MainActivity.mGoogleApiClient.isConnecting()) {
+            MainActivity.mSignInClicked = true;
+            MainActivity.mGoogleApiClient.connect();
+        }
     }
 
     // On game over
-    public void gameOver()
-    {
+    public void gameOver() {
         for (int i=0; i<16; i++) buttons.get(i).setClickable(false);
 
         blackHandler.removeCallbacks(blackRunnable);
@@ -371,25 +363,24 @@ public class PlayClassic extends BaseGameActivity {
         bestScoreTextView.setText(bestScoreStr);
 
         // Update leaderboard and achievements
-        if (getApiClient().isConnected()) {
-            Games.Leaderboards.submitScore(getApiClient(), App.LEADERBOARD_ID_CLASSIC, tiles);
-            if (tiles >= 100) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_beginner));
-            if (tiles >= 300) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_expert));
-            if (tiles >= 500) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_master_tapper));
-            if (tiles == 666) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_devil));
-            if (tiles >= 1000) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_cheater));
-            if (numBlack > 15) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_no_space));
-            if (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 10) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_newbie));
-            if (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 100) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_busy_fingers));
-            if (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 500) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_serious_play));
-            if (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 1000) Games.Achievements.unlock(getApiClient(), getString(R.string.achievement_geek_gamer));
+        if (MainActivity.mGoogleApiClient.isConnected()) {
+            Games.Leaderboards.submitScore(MainActivity.mGoogleApiClient, App.LEADERBOARD_ID_CLASSIC, tiles);
+            if (tiles >= 100) Games.Achievements.unlock(MainActivity.mGoogleApiClient, getString(R.string.achievement_beginner));
+            if (tiles >= 300) Games.Achievements.unlock(MainActivity.mGoogleApiClient, getString(R.string.achievement_expert));
+            if (tiles >= 500) Games.Achievements.unlock(MainActivity.mGoogleApiClient, getString(R.string.achievement_master_tapper));
+            if (tiles == 666) Games.Achievements.unlock(MainActivity.mGoogleApiClient, getString(R.string.achievement_devil));
+            if (tiles >= 1000) Games.Achievements.unlock(MainActivity.mGoogleApiClient, getString(R.string.achievement_cheater));
+            if (numBlack > 15) Games.Achievements.unlock(MainActivity.mGoogleApiClient, getString(R.string.achievement_no_space));
+            if (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 10) Games.Achievements.unlock(MainActivity.mGoogleApiClient, getString(R.string.achievement_newbie));
+            if (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 100) Games.Achievements.unlock(MainActivity.mGoogleApiClient, getString(R.string.achievement_busy_fingers));
+            if (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 500) Games.Achievements.unlock(MainActivity.mGoogleApiClient, getString(R.string.achievement_serious_play));
+            if (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) >= 1000) Games.Achievements.unlock(MainActivity.mGoogleApiClient, getString(R.string.achievement_geek_gamer));
         }
 
     }
 
     // Adding buttons to List 'buttons'
-    public void addButtonsToList()
-    {
+    public void addButtonsToList() {
         buttons = new ArrayList<>();
         buttons.add((Button) findViewById(R.id.RowOneBtn1));
         buttons.add((Button) findViewById(R.id.RowOneBtn2));
@@ -412,8 +403,7 @@ public class PlayClassic extends BaseGameActivity {
         buttons.add((Button) findViewById(R.id.RowFourBtn4));
     }
 
-    public void askForRating()
-    {
+    public void askForRating() {
         if (App.parameters.contains(RATE_ASKED))
         {
             if ((App.parameters.getInt(RATE_ASKED, 0) == -1) && (App.parameters.getInt(NUMBER_GAMES_PLAYED, 0) > 40))
@@ -455,8 +445,7 @@ public class PlayClassic extends BaseGameActivity {
         App.editorParameters.apply();
     }
 
-    private boolean isActivityStarted(Intent activityIntent)
-    {
+    private boolean isActivityStarted(Intent activityIntent) {
         try
         {
             startActivity(activityIntent);

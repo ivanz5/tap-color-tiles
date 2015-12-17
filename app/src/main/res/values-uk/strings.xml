@@ -60,4 +60,6 @@
     <string name="color_tiles">Кольорові плитки</string>
     <string name="select_tiles_color">Виберіть колір плиток</string>
     <string name="time_mode_time_placeholder">12.95с</string>
+    <string name="signin_other_error">Помилка входу. Спробуйте ще раз.</string>
+    <string name="signin_failure">Не вдається увійти.</string>
 </resources>

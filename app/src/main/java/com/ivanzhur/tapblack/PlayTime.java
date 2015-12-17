@@ -109,7 +109,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
         setGameButtonsOnClickListeners(); // Setting onclick listeners for tile buttons
 
         int fb = random.nextInt(4);
-        buttons.get(fb).setBackgroundColor(ContextCompat.getColor(this, R.color.black));
+        buttons.get(fb).setBackgroundColor(ContextCompat.getColor(this, R.color.ui_blue));
         idColor.put(buttons.get(fb).getId(), "black");
     }
 
@@ -296,7 +296,7 @@ public class PlayTime extends Activity implements AudioManager.OnAudioFocusChang
         }
         else
         {
-            view.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
+            view.setBackgroundColor(ContextCompat.getColor(this, R.color.ui_blue));
             idColor.put(view.getId(), "black");
         }
     }
